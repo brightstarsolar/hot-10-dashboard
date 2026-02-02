@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="300">
+    <title>Hot 10 - Daily Lead Scoring</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #f1f5f9;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 16px;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        header h1::before {
+            content: "🔥";
+            font-size: 2.5rem;
+        }
+        
+        .timestamp {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .leads-grid {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .lead-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .lead-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.15);
+        }
+        
+        .lead-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            gap: 15px;
+        }
+        
+        .rank {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .rank-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+        .rank-2 { background: linear-gradient(135deg, #94a3b8, #64748b); }
+        .rank-3 { background: linear-gradient(135deg, #d97706, #b45309); }
+        .rank-other { background: var(--primary); }
+        
+        .lead-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .lead-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .lead-contact {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .score-badge {
+            text-align: center;
+            padding: 10px 20px;
+            background: var(--bg);
+            border-radius: 12px;
+        }
+        
+        .score-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .score-high { color: var(--success); }
+        .score-medium { color: var(--warning); }
+        .score-low { color: var(--danger); }
+        
+        .score-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+        
+        .lead-body {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 900px) {
+            .lead-body {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .section {
+            background: var(--bg);
+            padding: 15px;
+            border-radius: 12px;
+        }
+        
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .factors-list {
+            list-style: none;
+        }
+        
+        .factor {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            font-size: 0.9rem;
+        }
+        
+        .factor-icon {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .factor.positive .factor-icon { color: var(--success); }
+        .factor.negative .factor-icon { color: var(--text-light); }
+        
+        .factor-points {
+            margin-left: auto;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        
+        .action-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .action-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .action-call { background: #dcfce7; color: #166534; }
+        .action-text { background: #dbeafe; color: #1e40af; }
+        .action-email { background: #fef3c7; color: #92400e; }
+        
+        .priority {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 8px;
+        }
+        
+        .priority-urgent { background: #fee2e2; color: #dc2626; }
+        .priority-high { background: #ffedd5; color: #ea580c; }
+        .priority-medium { background: #fef9c3; color: #ca8a04; }
+        .priority-low { background: #e0e7ff; color: #4f46e5; }
+        
+        .action-reason {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+        
+        .draft-message {
+            background: var(--bg);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            font-family: inherit;
+            line-height: 1.7;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .objections {
+            margin-top: 15px;
+        }
+        
+        .objection {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 12px;
+            background: #fef2f2;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: #991b1b;
+        }
+        
+        .talking-points {
+            margin-top: 15px;
+        }
+        
+        .talking-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .talking-point:last-child {
+            border-bottom: none;
+        }
+        
+        .personalization {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            padding: 10px;
+            background: #f0fdf4;
+            border-radius: 8px;
+            margin-top: 15px;
+            white-space: pre-wrap;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+        
+        .refresh-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Hot 10 - Daily Lead Scoring</h1>
+            <p class="timestamp">Generated: February 02, 2026 at 07:25 AM</p>
+        </header>
+        
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-value">10</div>
+                <div class="stat-label">Hot Leads</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">6</div>
+                <div class="stat-label">🔥 Urgent</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">8</div>
+                <div class="stat-label">📞 Call Now</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">78</div>
+                <div class="stat-label">Avg Score</div>
+            </div>
+        </div>
+        
+        <div class="leads-grid">
+            
+        <div class="lead-card">
+            <div class="lead-header">
+                <div class="rank rank-1">#1</div>
+                <div class="lead-info">
+                    <div class="lead-name">Christopher Garcia</div>
+                    <div class="lead-contact">
+                        (520) 742-2692 • christopher.garcia@email.com
+                    </div>
+                </div>
+                <div class="score-badge">
+                    <div class="score-value score-high">90</div>
+                    <div class="score-label">of 120 pts</div>
+                </div>
+            </div>
+            <div class="lead-body">
+                <div class="section">
+                    <div class="section-title">📊 Score Breakdown</div>
+                    <ul class="factors-list">
+                        
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Responsive (replied within 48hrs)</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Roof age < 15 years</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Credit score 700+</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Electric bill $500+/month</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Owns EV (home charging)</span>
+                <span class="factor-points">+10</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>No prior solar installation</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>No utility discounts (full rate)</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Recent activity (last 7 days)</span>
+                <span class="factor-points">+10</span>
+            </li>
+                    </ul>
+                    <div class="personalization">Lead Score: 90/120 (75%)
+• Credit: 750
+• Roof: 3 years old
+• Has EV 🚗
+• Pipeline stage: New Lead</div>
+                </div>
+                <div class="section">
+                    <div class="action-card">
+                        <span class="action-type action-call">📞 CALL</span>
+                        <span class="priority priority-urgent">URGENT</span>
+                        <p class="action-reason">High-value engaged lead - strike while hot!</p>
+                    </div>
+                    <div class="section-title">📝 Draft Message (click to copy)</div>
+                    <div class="draft-message">📞 CALL SCRIPT for Christopher Garcia:
+
+"Hi Christopher, this is [Your Name] from [Company]. 
+I hope I'm catching you at a good time.
+
+I wanted to follow up personally because based on our conversation, it looks like solar could save you a significant amount. With your EV charging needs, we can definitely put together something great for you.
+
+Do you have a few minutes to discuss next steps?"
+
+KEY POINTS TO COVER:
+• • Include EV charging in solar design - show total energy independence
+• Strong credit (750) = best financing rates available
+• Newer roof (3 years) - ideal for installation, no replacement needed</div>
+                    
+                    
+            <div class="talking-points">
+                <div class="section-title">💬 Key Talking Points</div>
+                <div class="talking-point">💡 Include EV charging in solar design - show total energy independence</div><div class="talking-point">💡 Strong credit (750) = best financing rates available</div><div class="talking-point">💡 Newer roof (3 years) - ideal for installation, no replacement needed</div><div class="talking-point">💡 30% Federal Tax Credit available (mention timeline)</div><div class="talking-point">💡 Protection from rising utility rates</div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lead-card">
+            <div class="lead-header">
+                <div class="rank rank-2">#2</div>
+                <div class="lead-info">
+                    <div class="lead-name">David Davis</div>
+                    <div class="lead-contact">
+                        (260) 611-4286 • david.davis@email.com
+                    </div>
+                </div>
+                <div class="score-badge">
+                    <div class="score-value score-high">85</div>
+                    <div class="score-label">of 120 pts</div>
+                </div>
+            </div>
+            <div class="lead-body">
+                <div class="section">
+                    <div class="section-title">📊 Score Breakdown</div>
+                    <ul class="factors-list">
+                        
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Responsive (replied within 48hrs)</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Roof age < 15 years</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Credit score 700+</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Electric bill $500+/month</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Owns EV (home charging)</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>No prior solar installation</span>
+                <span class="factor-points">+5</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>No utility discounts (full rate)</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Recent activity (last 7 days)</span>
+                <span class="factor-points">+10</span>
+            </li>
+                    </ul>
+                    <div class="personalization">Lead Score: 85/120 (71%)
+• Credit: 710
+• Roof: 14 years old
+• Pipeline stage: Quote Sent</div>
+                </div>
+                <div class="section">
+                    <div class="action-card">
+                        <span class="action-type action-call">📞 CALL</span>
+                        <span class="priority priority-high">HIGH</span>
+                        <p class="action-reason">Schedule call to include spouse/decision maker</p>
+                    </div>
+                    <div class="section-title">📝 Draft Message (click to copy)</div>
+                    <div class="draft-message">📞 CALL SCRIPT for David Davis:
+
+"Hi David, this is [Your Name] from [Company]. 
+I hear your neighbor had a great experience with us!
+
+I wanted to follow up personally because based on our conversation, it looks like solar could save you a significant amount. With your neighbor's recommendation needs, we can definitely put together something great for you.
+
+Do you have a few minutes to discuss next steps?"
+
+KEY POINTS TO COVER:
+• • Strong credit (710) = best financing rates available
+• 30% Federal Tax Credit available (mention timeline)
+• Protection from rising utility rates</div>
+                    
+            <div class="objections">
+                <div class="section-title">⚠️ Objections to Address</div>
+                <div class="objection">⚠️ Needs spouse buy-in: Offer to schedule joint call, emphasize family decision benefits</div>
+            </div>
+                    
+            <div class="talking-points">
+                <div class="section-title">💬 Key Talking Points</div>
+                <div class="talking-point">💡 Strong credit (710) = best financing rates available</div><div class="talking-point">💡 30% Federal Tax Credit available (mention timeline)</div><div class="talking-point">💡 Protection from rising utility rates</div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lead-card">
+            <div class="lead-header">
+                <div class="rank rank-3">#3</div>
+                <div class="lead-info">
+                    <div class="lead-name">John Thompson</div>
+                    <div class="lead-contact">
+                        (825) 608-5870 • john.thompson@email.com
+                    </div>
+                </div>
+                <div class="score-badge">
+                    <div class="score-value score-high">80</div>
+                    <div class="score-label">of 120 pts</div>
+                </div>
+            </div>
+            <div class="lead-body">
+                <div class="section">
+                    <div class="section-title">📊 Score Breakdown</div>
+                    <ul class="factors-list">
+                        
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Responsive (replied within 48hrs)</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Roof age < 15 years</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Credit score 700+</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Electric bill $500+/month</span>
+                <span class="factor-points">+25</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Owns EV (home charging)</span>
+                <span class="factor-points">+10</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>No prior solar installation</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>No utility discounts (full rate)</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Recent activity (last 7 days)</span>
+                <span class="factor-points">+10</span>
+            </li>
+                    </ul>
+                    <div class="personalization">Lead Score: 80/120 (67%)
+• Electric: $650/month
+• Roof: 6 years old
+• Has EV 🚗
+• Buying signals: excited
+• Pipeline stage: Appointment Set</div>
+                </div>
+                <div class="section">
+                    <div class="action-card">
+                        <span class="action-type action-call">📞 CALL</span>
+                        <span class="priority priority-urgent">URGENT</span>
+                        <p class="action-reason">High-value engaged lead - strike while hot!</p>
+                    </div>
+                    <div class="section-title">📝 Draft Message (click to copy)</div>
+                    <div class="draft-message">📞 CALL SCRIPT for John Thompson:
+
+"Hi John, this is [Your Name] from [Company]. 
+Thanks again for meeting with us!
+
+I wanted to follow up personally because based on our conversation, it looks like solar could save you a significant amount. With your EV charging needs, we can definitely put together something great for you.
+
+Do you have a few minutes to discuss next steps?"
+
+KEY POINTS TO COVER:
+• • Potential annual savings: ~$5,459 based on $650/mo bill
+• Include EV charging in solar design - show total energy independence
+• Newer roof (6 years) - ideal for installation, no replacement needed</div>
+                    
+                    
+            <div class="talking-points">
+                <div class="section-title">💬 Key Talking Points</div>
+                <div class="talking-point">💡 Potential annual savings: ~$5,459 based on $650/mo bill</div><div class="talking-point">💡 Include EV charging in solar design - show total energy independence</div><div class="talking-point">💡 Newer roof (6 years) - ideal for installation, no replacement needed</div><div class="talking-point">💡 30% Federal Tax Credit available (mention timeline)</div><div class="talking-point">💡 Protection from rising utility rates</div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lead-card">
+            <div class="lead-header">
+                <div class="rank rank-other">#4</div>
+                <div class="lead-info">
+                    <div class="lead-name">Michael Lee</div>
+                    <div class="lead-contact">
+                        (238) 768-5364 • michael.lee@email.com
+                    </div>
+                </div>
+                <div class="score-badge">
+                    <div class="score-value score-high">80</div>
+                    <div class="score-label">of 120 pts</div>
+                </div>
+            </div>
+            <div class="lead-body">
+                <div class="section">
+                    <div class="section-title">📊 Score Breakdown</div>
+                    <ul class="factors-list">
+                        
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Responsive (replied within 48hrs)</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Roof age < 15 years</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Credit score 700+</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Electric bill $500+/month</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Owns EV (home charging)</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>No prior solar installation</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>No utility discounts (full rate)</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Recent activity (last 7 days)</span>
+                <span class="factor-points">+10</span>
+            </li>
+                    </ul>
+                    <div class="personalization">Lead Score: 80/120 (67%)
+• Credit: 760
+• Roof: 1 years old
+• Buying signals: urgency, referred
+• Pipeline stage: Appointment Set</div>
+                </div>
+                <div class="section">
+                    <div class="action-card">
+                        <span class="action-type action-call">📞 CALL</span>
+                        <span class="priority priority-urgent">URGENT</span>
+                        <p class="action-reason">High-value engaged lead - strike while hot!</p>
+                    </div>
+                    <div class="section-title">📝 Draft Message (click to copy)</div>
+                    <div class="draft-message">📞 CALL SCRIPT for Michael Lee:
+
+"Hi Michael, this is [Your Name] from [Company]. 
+I hear your neighbor had a great experience with us!
+
+I wanted to follow up personally because based on our conversation, it looks like solar could save you a significant amount. With your neighbor's recommendation needs, we can definitely put together something great for you.
+
+Do you have a few minutes to discuss next steps?"
+
+KEY POINTS TO COVER:
+• • Strong credit (760) = best financing rates available
+• Newer roof (1 years) - ideal for installation, no replacement needed
+• 30% Federal Tax Credit available (mention timeline)</div>
+                    
+                    
+            <div class="talking-points">
+                <div class="section-title">💬 Key Talking Points</div>
+                <div class="talking-point">💡 Strong credit (760) = best financing rates available</div><div class="talking-point">💡 Newer roof (1 years) - ideal for installation, no replacement needed</div><div class="talking-point">💡 30% Federal Tax Credit available (mention timeline)</div><div class="talking-point">💡 Protection from rising utility rates</div><div class="talking-point">💡 Referral customer - mention neighbor's experience/satisfaction</div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lead-card">
+            <div class="lead-header">
+                <div class="rank rank-other">#5</div>
+                <div class="lead-info">
+                    <div class="lead-name">Richard Anderson</div>
+                    <div class="lead-contact">
+                        (241) 873-5603 • richard.anderson@email.com
+                    </div>
+                </div>
+                <div class="score-badge">
+                    <div class="score-value score-high">80</div>
+                    <div class="score-label">of 120 pts</div>
+                </div>
+            </div>
+            <div class="lead-body">
+                <div class="section">
+                    <div class="section-title">📊 Score Breakdown</div>
+                    <ul class="factors-list">
+                        
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Responsive (replied within 48hrs)</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Roof age < 15 years</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Credit score 700+</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Electric bill $500+/month</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Owns EV (home charging)</span>
+                <span class="factor-points">+10</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>No prior solar installation</span>
+                <span class="factor-points">+5</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>No utility discounts (full rate)</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Recent activity (last 7 days)</span>
+                <span class="factor-points">+10</span>
+            </li>
+                    </ul>
+                    <div class="personalization">Lead Score: 80/120 (67%)
+• Credit: 790
+• Has EV 🚗
+• Buying signals: excited
+• Pipeline stage: Appointment Set</div>
+                </div>
+                <div class="section">
+                    <div class="action-card">
+                        <span class="action-type action-call">📞 CALL</span>
+                        <span class="priority priority-urgent">URGENT</span>
+                        <p class="action-reason">High-value engaged lead - strike while hot!</p>
+                    </div>
+                    <div class="section-title">📝 Draft Message (click to copy)</div>
+                    <div class="draft-message">📞 CALL SCRIPT for Richard Anderson:
+
+"Hi Richard, this is [Your Name] from [Company]. 
+I hope I'm catching you at a good time.
+
+I wanted to follow up personally because based on our conversation, it looks like solar could save you a significant amount. With your EV charging needs, we can definitely put together something great for you.
+
+Do you have a few minutes to discuss next steps?"
+
+KEY POINTS TO COVER:
+• • Include EV charging in solar design - show total energy independence
+• Strong credit (790) = best financing rates available
+• 30% Federal Tax Credit available (mention timeline)</div>
+                    
+                    
+            <div class="talking-points">
+                <div class="section-title">💬 Key Talking Points</div>
+                <div class="talking-point">💡 Include EV charging in solar design - show total energy independence</div><div class="talking-point">💡 Strong credit (790) = best financing rates available</div><div class="talking-point">💡 30% Federal Tax Credit available (mention timeline)</div><div class="talking-point">💡 Protection from rising utility rates</div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lead-card">
+            <div class="lead-header">
+                <div class="rank rank-other">#6</div>
+                <div class="lead-info">
+                    <div class="lead-name">Daniel Jones</div>
+                    <div class="lead-contact">
+                        (523) 247-5830 • daniel.jones@email.com
+                    </div>
+                </div>
+                <div class="score-badge">
+                    <div class="score-value score-high">80</div>
+                    <div class="score-label">of 120 pts</div>
+                </div>
+            </div>
+            <div class="lead-body">
+                <div class="section">
+                    <div class="section-title">📊 Score Breakdown</div>
+                    <ul class="factors-list">
+                        
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Responsive (replied within 48hrs)</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Roof age < 15 years</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Credit score 700+</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Electric bill $500+/month</span>
+                <span class="factor-points">+25</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Owns EV (home charging)</span>
+                <span class="factor-points">+10</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>No prior solar installation</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>No utility discounts (full rate)</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Recent activity (last 7 days)</span>
+                <span class="factor-points">+10</span>
+            </li>
+                    </ul>
+                    <div class="personalization">Lead Score: 80/120 (67%)
+• Electric: $650/month
+• Roof: 6 years old
+• Has EV 🚗
+• Buying signals: excited
+• Pipeline stage: Appointment Set</div>
+                </div>
+                <div class="section">
+                    <div class="action-card">
+                        <span class="action-type action-call">📞 CALL</span>
+                        <span class="priority priority-urgent">URGENT</span>
+                        <p class="action-reason">High-value engaged lead - strike while hot!</p>
+                    </div>
+                    <div class="section-title">📝 Draft Message (click to copy)</div>
+                    <div class="draft-message">📞 CALL SCRIPT for Daniel Jones:
+
+"Hi Daniel, this is [Your Name] from [Company]. 
+Thanks again for meeting with us!
+
+I wanted to follow up personally because based on our conversation, it looks like solar could save you a significant amount. With your EV charging needs, we can definitely put together something great for you.
+
+Do you have a few minutes to discuss next steps?"
+
+KEY POINTS TO COVER:
+• • Potential annual savings: ~$5,459 based on $650/mo bill
+• Include EV charging in solar design - show total energy independence
+• Newer roof (6 years) - ideal for installation, no replacement needed</div>
+                    
+                    
+            <div class="talking-points">
+                <div class="section-title">💬 Key Talking Points</div>
+                <div class="talking-point">💡 Potential annual savings: ~$5,459 based on $650/mo bill</div><div class="talking-point">💡 Include EV charging in solar design - show total energy independence</div><div class="talking-point">💡 Newer roof (6 years) - ideal for installation, no replacement needed</div><div class="talking-point">💡 30% Federal Tax Credit available (mention timeline)</div><div class="talking-point">💡 Protection from rising utility rates</div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lead-card">
+            <div class="lead-header">
+                <div class="rank rank-other">#7</div>
+                <div class="lead-info">
+                    <div class="lead-name">Andrew Johnson</div>
+                    <div class="lead-contact">
+                        (331) 442-1454 • andrew.johnson@email.com
+                    </div>
+                </div>
+                <div class="score-badge">
+                    <div class="score-value score-high">75</div>
+                    <div class="score-label">of 120 pts</div>
+                </div>
+            </div>
+            <div class="lead-body">
+                <div class="section">
+                    <div class="section-title">📊 Score Breakdown</div>
+                    <ul class="factors-list">
+                        
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Responsive (replied within 48hrs)</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Roof age < 15 years</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Credit score 700+</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Electric bill $500+/month</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Owns EV (home charging)</span>
+                <span class="factor-points">+10</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>No prior solar installation</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>No utility discounts (full rate)</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Recent activity (last 7 days)</span>
+                <span class="factor-points">+10</span>
+            </li>
+                    </ul>
+                    <div class="personalization">Lead Score: 75/120 (62%)
+• Credit: 750
+• Has EV 🚗
+• Buying signals: ready_to_buy, urgency, excited
+• Pipeline stage: Contract Pending</div>
+                </div>
+                <div class="section">
+                    <div class="action-card">
+                        <span class="action-type action-email">📧 EMAIL</span>
+                        <span class="priority priority-medium">MEDIUM</span>
+                        <p class="action-reason">Send value-focused email with financing options</p>
+                    </div>
+                    <div class="section-title">📝 Draft Message (click to copy)</div>
+                    <div class="draft-message">📧 EMAIL to Andrew Johnson:
+
+Subject: Your Custom Solar Savings Estimate
+
+Hi Andrew,
+
+Thank you for your interest in solar! Based on our initial conversation, I wanted to share some exciting information about your potential savings.
+
+Based on typical usage in your area, you could be looking at significant monthly savings while also protecting yourself from rising utility rates.
+
+Here's what sets us apart:
+✓ Premium tier-1 panels with 25-year warranty
+✓ Local installation team (not subcontractors)
+✓ $0 down financing available
+✓ 30% Federal Tax Credit
+
+I'd love to schedule a quick 15-minute call to discuss your specific situation and answer any questions.
+
+What day works best for you this week?
+
+Best regards,
+[Your Name]
+[Company]</div>
+                    
+            <div class="objections">
+                <div class="section-title">⚠️ Objections to Address</div>
+                <div class="objection">⚠️ Price sensitive: Lead with savings, mention $0 down options, 30% tax credit</div>
+            </div>
+                    
+            <div class="talking-points">
+                <div class="section-title">💬 Key Talking Points</div>
+                <div class="talking-point">💡 Include EV charging in solar design - show total energy independence</div><div class="talking-point">💡 Strong credit (750) = best financing rates available</div><div class="talking-point">💡 30% Federal Tax Credit available (mention timeline)</div><div class="talking-point">💡 Protection from rising utility rates</div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lead-card">
+            <div class="lead-header">
+                <div class="rank rank-other">#8</div>
+                <div class="lead-info">
+                    <div class="lead-name">James Johnson</div>
+                    <div class="lead-contact">
+                        (547) 279-8525 • james.johnson@email.com
+                    </div>
+                </div>
+                <div class="score-badge">
+                    <div class="score-value score-high">75</div>
+                    <div class="score-label">of 120 pts</div>
+                </div>
+            </div>
+            <div class="lead-body">
+                <div class="section">
+                    <div class="section-title">📊 Score Breakdown</div>
+                    <ul class="factors-list">
+                        
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Responsive (replied within 48hrs)</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Roof age < 15 years</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Credit score 700+</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Electric bill $500+/month</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Owns EV (home charging)</span>
+                <span class="factor-points">+10</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>No prior solar installation</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>No utility discounts (full rate)</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Recent activity (last 7 days)</span>
+                <span class="factor-points">+10</span>
+            </li>
+                    </ul>
+                    <div class="personalization">Lead Score: 75/120 (62%)
+• Credit: 750
+• Has EV 🚗
+• Buying signals: ready_to_buy, urgency, excited
+• Pipeline stage: Contract Pending</div>
+                </div>
+                <div class="section">
+                    <div class="action-card">
+                        <span class="action-type action-email">📧 EMAIL</span>
+                        <span class="priority priority-medium">MEDIUM</span>
+                        <p class="action-reason">Send value-focused email with financing options</p>
+                    </div>
+                    <div class="section-title">📝 Draft Message (click to copy)</div>
+                    <div class="draft-message">📧 EMAIL to James Johnson:
+
+Subject: Your Custom Solar Savings Estimate
+
+Hi James,
+
+Thank you for your interest in solar! Based on our initial conversation, I wanted to share some exciting information about your potential savings.
+
+Based on typical usage in your area, you could be looking at significant monthly savings while also protecting yourself from rising utility rates.
+
+Here's what sets us apart:
+✓ Premium tier-1 panels with 25-year warranty
+✓ Local installation team (not subcontractors)
+✓ $0 down financing available
+✓ 30% Federal Tax Credit
+
+I'd love to schedule a quick 15-minute call to discuss your specific situation and answer any questions.
+
+What day works best for you this week?
+
+Best regards,
+[Your Name]
+[Company]</div>
+                    
+            <div class="objections">
+                <div class="section-title">⚠️ Objections to Address</div>
+                <div class="objection">⚠️ Price sensitive: Lead with savings, mention $0 down options, 30% tax credit</div>
+            </div>
+                    
+            <div class="talking-points">
+                <div class="section-title">💬 Key Talking Points</div>
+                <div class="talking-point">💡 Include EV charging in solar design - show total energy independence</div><div class="talking-point">💡 Strong credit (750) = best financing rates available</div><div class="talking-point">💡 30% Federal Tax Credit available (mention timeline)</div><div class="talking-point">💡 Protection from rising utility rates</div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lead-card">
+            <div class="lead-header">
+                <div class="rank rank-other">#9</div>
+                <div class="lead-info">
+                    <div class="lead-name">Daniel Garcia</div>
+                    <div class="lead-contact">
+                        (304) 248-6634 • daniel.garcia@email.com
+                    </div>
+                </div>
+                <div class="score-badge">
+                    <div class="score-value score-high">70</div>
+                    <div class="score-label">of 120 pts</div>
+                </div>
+            </div>
+            <div class="lead-body">
+                <div class="section">
+                    <div class="section-title">📊 Score Breakdown</div>
+                    <ul class="factors-list">
+                        
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Responsive (replied within 48hrs)</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Roof age < 15 years</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Credit score 700+</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Electric bill $500+/month</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Owns EV (home charging)</span>
+                <span class="factor-points">+10</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>No prior solar installation</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>No utility discounts (full rate)</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Recent activity (last 7 days)</span>
+                <span class="factor-points">+10</span>
+            </li>
+                    </ul>
+                    <div class="personalization">Lead Score: 70/120 (58%)
+• Roof: 12 years old
+• Has EV 🚗
+• Pipeline stage: Quote Sent</div>
+                </div>
+                <div class="section">
+                    <div class="action-card">
+                        <span class="action-type action-call">📞 CALL</span>
+                        <span class="priority priority-medium">MEDIUM</span>
+                        <p class="action-reason">Solid lead - call to qualify further</p>
+                    </div>
+                    <div class="section-title">📝 Draft Message (click to copy)</div>
+                    <div class="draft-message">📞 CALL SCRIPT for Daniel Garcia:
+
+"Hi Daniel, this is [Your Name] from [Company]. 
+I hope I'm catching you at a good time.
+
+I wanted to follow up personally because based on our conversation, it looks like solar could save you a significant amount. With your EV charging needs, we can definitely put together something great for you.
+
+Do you have a few minutes to discuss next steps?"
+
+KEY POINTS TO COVER:
+• • Include EV charging in solar design - show total energy independence
+• 30% Federal Tax Credit available (mention timeline)
+• Protection from rising utility rates</div>
+                    
+                    
+            <div class="talking-points">
+                <div class="section-title">💬 Key Talking Points</div>
+                <div class="talking-point">💡 Include EV charging in solar design - show total energy independence</div><div class="talking-point">💡 30% Federal Tax Credit available (mention timeline)</div><div class="talking-point">💡 Protection from rising utility rates</div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lead-card">
+            <div class="lead-header">
+                <div class="rank rank-other">#10</div>
+                <div class="lead-info">
+                    <div class="lead-name">James Hernandez</div>
+                    <div class="lead-contact">
+                        (900) 560-9774 • james.hernandez@email.com
+                    </div>
+                </div>
+                <div class="score-badge">
+                    <div class="score-value score-high">70</div>
+                    <div class="score-label">of 120 pts</div>
+                </div>
+            </div>
+            <div class="lead-body">
+                <div class="section">
+                    <div class="section-title">📊 Score Breakdown</div>
+                    <ul class="factors-list">
+                        
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Responsive (replied within 48hrs)</span>
+                <span class="factor-points">+20</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Roof age < 15 years</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Credit score 700+</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>Electric bill $500+/month</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Owns EV (home charging)</span>
+                <span class="factor-points">+10</span>
+            </li>
+            <li class="factor negative">
+                <span class="factor-icon">○</span>
+                <span>No prior solar installation</span>
+                <span class="factor-points"></span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>No utility discounts (full rate)</span>
+                <span class="factor-points">+15</span>
+            </li>
+            <li class="factor positive">
+                <span class="factor-icon">✅</span>
+                <span>Recent activity (last 7 days)</span>
+                <span class="factor-points">+10</span>
+            </li>
+                    </ul>
+                    <div class="personalization">Lead Score: 70/120 (58%)
+• Roof: 5 years old
+• Has EV 🚗
+• Buying signals: ready_to_buy
+• Pipeline stage: Negotiation</div>
+                </div>
+                <div class="section">
+                    <div class="action-card">
+                        <span class="action-type action-call">📞 CALL</span>
+                        <span class="priority priority-urgent">URGENT</span>
+                        <p class="action-reason">High-value engaged lead - strike while hot!</p>
+                    </div>
+                    <div class="section-title">📝 Draft Message (click to copy)</div>
+                    <div class="draft-message">📞 CALL SCRIPT for James Hernandez:
+
+"Hi James, this is [Your Name] from [Company]. 
+I hope I'm catching you at a good time.
+
+I wanted to follow up personally because based on our conversation, it looks like solar could save you a significant amount. With your EV charging needs, we can definitely put together something great for you.
+
+Do you have a few minutes to discuss next steps?"
+
+KEY POINTS TO COVER:
+• • Include EV charging in solar design - show total energy independence
+• Newer roof (5 years) - ideal for installation, no replacement needed
+• 30% Federal Tax Credit available (mention timeline)</div>
+                    
+                    
+            <div class="talking-points">
+                <div class="section-title">💬 Key Talking Points</div>
+                <div class="talking-point">💡 Include EV charging in solar design - show total energy independence</div><div class="talking-point">💡 Newer roof (5 years) - ideal for installation, no replacement needed</div><div class="talking-point">💡 30% Federal Tax Credit available (mention timeline)</div><div class="talking-point">💡 Protection from rising utility rates</div>
+            </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+        <footer>
+            <p>Solar Lead Scoring Dashboard • Powered by GHL Integration</p>
+            <div class="refresh-info">
+                <span class="live-dot"></span>
+                <span>Auto-refreshes every 5 minutes</span>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // Add copy functionality for draft messages
+        document.querySelectorAll('.draft-message').forEach(el => {
+            el.style.cursor = 'pointer';
+            el.title = 'Click to copy';
+            el.addEventListener('click', () => {
+                navigator.clipboard.writeText(el.textContent);
+                const original = el.style.background;
+                el.style.background = '#dcfce7';
+                setTimeout(() => el.style.background = original, 500);
+            });
+        });
+    </script>
+</body>
+</html>

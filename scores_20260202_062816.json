@@ -1,0 +1,700 @@
+[
+  {
+    "rank": 1,
+    "name": "Daniel Johnson",
+    "email": "daniel.johnson@email.com",
+    "phone": "(817) 317-5296",
+    "score": 90,
+    "max_score": 120,
+    "percentage": 75.0,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 3 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": true,
+        "evidence": "Credit score: 750"
+      },
+      {
+        "name": "Electric bill $500+/month",
+        "points": 25,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns EV (home charging)",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner - high electricity awareness, charges at home"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No utility discounts (full rate)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Paying full utility rate - max savings potential"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 10,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "urgent",
+    "reason": "High-value engaged lead - strike while hot!",
+    "objections": [],
+    "talking_points": [
+      "Include EV charging in solar design - show total energy independence",
+      "Strong credit (750) = best financing rates available",
+      "Newer roof (3 years) - ideal for installation, no replacement needed",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 2,
+    "name": "James Taylor",
+    "email": "james.taylor@email.com",
+    "phone": "(503) 375-7229",
+    "score": 85,
+    "max_score": 120,
+    "percentage": 70.8,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 14 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": true,
+        "evidence": "Credit score: 710"
+      },
+      {
+        "name": "Electric bill $500+/month",
+        "points": 25,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns EV (home charging)",
+        "points": 10,
+        "matched": false,
+        "evidence": "No EV mentioned"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": true,
+        "evidence": "First-time solar customer"
+      },
+      {
+        "name": "No utility discounts (full rate)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Paying full utility rate - max savings potential"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 10,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "high",
+    "reason": "Schedule call to include spouse/decision maker",
+    "objections": [
+      "\u26a0\ufe0f Needs spouse buy-in: Offer to schedule joint call, emphasize family decision benefits"
+    ],
+    "talking_points": [
+      "Strong credit (710) = best financing rates available",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 3,
+    "name": "Michelle Martinez",
+    "email": "michelle.martinez@email.com",
+    "phone": "(464) 751-8105",
+    "score": 80,
+    "max_score": 120,
+    "percentage": 66.7,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 6 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": false,
+        "evidence": "Credit score unknown"
+      },
+      {
+        "name": "Electric bill $500+/month",
+        "points": 25,
+        "matched": true,
+        "evidence": "Electric bill: $650/month"
+      },
+      {
+        "name": "Owns EV (home charging)",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner - high electricity awareness, charges at home"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No utility discounts (full rate)",
+        "points": 15,
+        "matched": false,
+        "evidence": "Has utility discount program"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 10,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "urgent",
+    "reason": "High-value engaged lead - strike while hot!",
+    "objections": [],
+    "talking_points": [
+      "Potential annual savings: ~$5,459 based on $650/mo bill",
+      "Include EV charging in solar design - show total energy independence",
+      "Newer roof (6 years) - ideal for installation, no replacement needed",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 4,
+    "name": "Thomas Johnson",
+    "email": "thomas.johnson@email.com",
+    "phone": "(692) 334-1606",
+    "score": 80,
+    "max_score": 120,
+    "percentage": 66.7,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 1 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": true,
+        "evidence": "Credit score: 760"
+      },
+      {
+        "name": "Electric bill $500+/month",
+        "points": 25,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns EV (home charging)",
+        "points": 10,
+        "matched": false,
+        "evidence": "No EV mentioned"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No utility discounts (full rate)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Paying full utility rate - max savings potential"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 10,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "urgent",
+    "reason": "High-value engaged lead - strike while hot!",
+    "objections": [],
+    "talking_points": [
+      "Strong credit (760) = best financing rates available",
+      "Newer roof (1 years) - ideal for installation, no replacement needed",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates",
+      "Referral customer - mention neighbor's experience/satisfaction"
+    ]
+  },
+  {
+    "rank": 5,
+    "name": "John Hernandez",
+    "email": "john.hernandez@email.com",
+    "phone": "(961) 835-7816",
+    "score": 80,
+    "max_score": 120,
+    "percentage": 66.7,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": false,
+        "evidence": "Roof age unknown"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": true,
+        "evidence": "Credit score: 790"
+      },
+      {
+        "name": "Electric bill $500+/month",
+        "points": 25,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns EV (home charging)",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner - high electricity awareness, charges at home"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": true,
+        "evidence": "First-time solar customer"
+      },
+      {
+        "name": "No utility discounts (full rate)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Paying full utility rate - max savings potential"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 10,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "urgent",
+    "reason": "High-value engaged lead - strike while hot!",
+    "objections": [],
+    "talking_points": [
+      "Include EV charging in solar design - show total energy independence",
+      "Strong credit (790) = best financing rates available",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 6,
+    "name": "Laura Wilson",
+    "email": "laura.wilson@email.com",
+    "phone": "(958) 419-4252",
+    "score": 80,
+    "max_score": 120,
+    "percentage": 66.7,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 6 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": false,
+        "evidence": "Credit score unknown"
+      },
+      {
+        "name": "Electric bill $500+/month",
+        "points": 25,
+        "matched": true,
+        "evidence": "Electric bill: $650/month"
+      },
+      {
+        "name": "Owns EV (home charging)",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner - high electricity awareness, charges at home"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No utility discounts (full rate)",
+        "points": 15,
+        "matched": false,
+        "evidence": "Has utility discount program"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 10,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "urgent",
+    "reason": "High-value engaged lead - strike while hot!",
+    "objections": [],
+    "talking_points": [
+      "Potential annual savings: ~$5,459 based on $650/mo bill",
+      "Include EV charging in solar design - show total energy independence",
+      "Newer roof (6 years) - ideal for installation, no replacement needed",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 7,
+    "name": "Jessica Lee",
+    "email": "jessica.lee@email.com",
+    "phone": "(532) 776-9079",
+    "score": 75,
+    "max_score": 120,
+    "percentage": 62.5,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": false,
+        "evidence": "Roof age unknown"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": true,
+        "evidence": "Credit score: 750"
+      },
+      {
+        "name": "Electric bill $500+/month",
+        "points": 25,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns EV (home charging)",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner - high electricity awareness, charges at home"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No utility discounts (full rate)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Paying full utility rate - max savings potential"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 10,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "email",
+    "priority": "medium",
+    "reason": "Send value-focused email with financing options",
+    "objections": [
+      "\u26a0\ufe0f Price sensitive: Lead with savings, mention $0 down options, 30% tax credit"
+    ],
+    "talking_points": [
+      "Include EV charging in solar design - show total energy independence",
+      "Strong credit (750) = best financing rates available",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 8,
+    "name": "Emily Lewis",
+    "email": "emily.lewis@email.com",
+    "phone": "(927) 876-6752",
+    "score": 75,
+    "max_score": 120,
+    "percentage": 62.5,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": false,
+        "evidence": "Roof age unknown"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": true,
+        "evidence": "Credit score: 750"
+      },
+      {
+        "name": "Electric bill $500+/month",
+        "points": 25,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns EV (home charging)",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner - high electricity awareness, charges at home"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No utility discounts (full rate)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Paying full utility rate - max savings potential"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 10,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "email",
+    "priority": "medium",
+    "reason": "Send value-focused email with financing options",
+    "objections": [
+      "\u26a0\ufe0f Price sensitive: Lead with savings, mention $0 down options, 30% tax credit"
+    ],
+    "talking_points": [
+      "Include EV charging in solar design - show total energy independence",
+      "Strong credit (750) = best financing rates available",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 9,
+    "name": "Stephanie Smith",
+    "email": "stephanie.smith@email.com",
+    "phone": "(292) 292-8127",
+    "score": 70,
+    "max_score": 120,
+    "percentage": 58.3,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 12 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": false,
+        "evidence": "Credit score unknown"
+      },
+      {
+        "name": "Electric bill $500+/month",
+        "points": 25,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns EV (home charging)",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner - high electricity awareness, charges at home"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No utility discounts (full rate)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Paying full utility rate - max savings potential"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 10,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "medium",
+    "reason": "Solid lead - call to qualify further",
+    "objections": [],
+    "talking_points": [
+      "Include EV charging in solar design - show total energy independence",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 10,
+    "name": "Daniel Lewis",
+    "email": "daniel.lewis@email.com",
+    "phone": "(239) 819-2530",
+    "score": 70,
+    "max_score": 120,
+    "percentage": 58.3,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 5 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": false,
+        "evidence": "Credit score unknown"
+      },
+      {
+        "name": "Electric bill $500+/month",
+        "points": 25,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns EV (home charging)",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner - high electricity awareness, charges at home"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No utility discounts (full rate)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Paying full utility rate - max savings potential"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 10,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "urgent",
+    "reason": "High-value engaged lead - strike while hot!",
+    "objections": [],
+    "talking_points": [
+      "Include EV charging in solar design - show total energy independence",
+      "Newer roof (5 years) - ideal for installation, no replacement needed",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  }
+]

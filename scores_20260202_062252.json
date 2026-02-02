@@ -1,0 +1,699 @@
+[
+  {
+    "rank": 1,
+    "name": "Jennifer Davis",
+    "email": "jennifer.davis@email.com",
+    "phone": "(996) 218-9163",
+    "score": 85,
+    "max_score": 110,
+    "percentage": 77.3,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 6 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": false,
+        "evidence": "Credit score unknown"
+      },
+      {
+        "name": "Electric bill $200+/month",
+        "points": 15,
+        "matched": true,
+        "evidence": "Electric bill: $350/month"
+      },
+      {
+        "name": "Owns electric vehicle",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner detected"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No discounts requested",
+        "points": 10,
+        "matched": true,
+        "evidence": "No price objections"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "urgent",
+    "reason": "High-value engaged lead - strike while hot!",
+    "objections": [],
+    "talking_points": [
+      "Potential annual savings: ~$2,939 based on $350/mo bill",
+      "Include EV charging in solar design - show total energy independence",
+      "Newer roof (6 years) - ideal for installation, no replacement needed",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 2,
+    "name": "Daniel Moore",
+    "email": "daniel.moore@email.com",
+    "phone": "(229) 827-3069",
+    "score": 85,
+    "max_score": 110,
+    "percentage": 77.3,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 14 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": true,
+        "evidence": "Credit score: 710"
+      },
+      {
+        "name": "Electric bill $200+/month",
+        "points": 15,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns electric vehicle",
+        "points": 10,
+        "matched": false,
+        "evidence": "No EV mentioned"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": true,
+        "evidence": "First-time solar customer"
+      },
+      {
+        "name": "No discounts requested",
+        "points": 10,
+        "matched": true,
+        "evidence": "No price objections"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "high",
+    "reason": "Schedule call to include spouse/decision maker",
+    "objections": [
+      "\u26a0\ufe0f Needs spouse buy-in: Offer to schedule joint call, emphasize family decision benefits"
+    ],
+    "talking_points": [
+      "Strong credit (710) = best financing rates available",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 3,
+    "name": "Christopher Brown",
+    "email": "christopher.brown@email.com",
+    "phone": "(482) 960-1950",
+    "score": 85,
+    "max_score": 110,
+    "percentage": 77.3,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 6 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": false,
+        "evidence": "Credit score unknown"
+      },
+      {
+        "name": "Electric bill $200+/month",
+        "points": 15,
+        "matched": true,
+        "evidence": "Electric bill: $350/month"
+      },
+      {
+        "name": "Owns electric vehicle",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner detected"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No discounts requested",
+        "points": 10,
+        "matched": true,
+        "evidence": "No price objections"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "urgent",
+    "reason": "High-value engaged lead - strike while hot!",
+    "objections": [],
+    "talking_points": [
+      "Potential annual savings: ~$2,939 based on $350/mo bill",
+      "Include EV charging in solar design - show total energy independence",
+      "Newer roof (6 years) - ideal for installation, no replacement needed",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 4,
+    "name": "Matthew Martin",
+    "email": "matthew.martin@email.com",
+    "phone": "(997) 940-4714",
+    "score": 80,
+    "max_score": 110,
+    "percentage": 72.7,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 1 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": true,
+        "evidence": "Credit score: 760"
+      },
+      {
+        "name": "Electric bill $200+/month",
+        "points": 15,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns electric vehicle",
+        "points": 10,
+        "matched": false,
+        "evidence": "No EV mentioned"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No discounts requested",
+        "points": 10,
+        "matched": true,
+        "evidence": "No price objections"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "urgent",
+    "reason": "High-value engaged lead - strike while hot!",
+    "objections": [],
+    "talking_points": [
+      "Strong credit (760) = best financing rates available",
+      "Newer roof (1 years) - ideal for installation, no replacement needed",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates",
+      "Referral customer - mention neighbor's experience/satisfaction"
+    ]
+  },
+  {
+    "rank": 5,
+    "name": "David Jones",
+    "email": "david.jones@email.com",
+    "phone": "(439) 303-5022",
+    "score": 80,
+    "max_score": 110,
+    "percentage": 72.7,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": false,
+        "evidence": "Roof age unknown"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": true,
+        "evidence": "Credit score: 790"
+      },
+      {
+        "name": "Electric bill $200+/month",
+        "points": 15,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns electric vehicle",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner detected"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": true,
+        "evidence": "First-time solar customer"
+      },
+      {
+        "name": "No discounts requested",
+        "points": 10,
+        "matched": true,
+        "evidence": "No price objections"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "urgent",
+    "reason": "High-value engaged lead - strike while hot!",
+    "objections": [],
+    "talking_points": [
+      "Include EV charging in solar design - show total energy independence",
+      "Strong credit (790) = best financing rates available",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 6,
+    "name": "Michelle Martinez",
+    "email": "michelle.martinez@email.com",
+    "phone": "(239) 457-2771",
+    "score": 80,
+    "max_score": 110,
+    "percentage": 72.7,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 1 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": true,
+        "evidence": "Credit score: 760"
+      },
+      {
+        "name": "Electric bill $200+/month",
+        "points": 15,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns electric vehicle",
+        "points": 10,
+        "matched": false,
+        "evidence": "No EV mentioned"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No discounts requested",
+        "points": 10,
+        "matched": true,
+        "evidence": "No price objections"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "urgent",
+    "reason": "High-value engaged lead - strike while hot!",
+    "objections": [],
+    "talking_points": [
+      "Strong credit (760) = best financing rates available",
+      "Newer roof (1 years) - ideal for installation, no replacement needed",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates",
+      "Referral customer - mention neighbor's experience/satisfaction"
+    ]
+  },
+  {
+    "rank": 7,
+    "name": "Thomas Johnson",
+    "email": "thomas.johnson@email.com",
+    "phone": "(337) 887-3794",
+    "score": 75,
+    "max_score": 110,
+    "percentage": 68.2,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": false,
+        "evidence": "Roof age unknown"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": true,
+        "evidence": "Credit score: 750"
+      },
+      {
+        "name": "Electric bill $200+/month",
+        "points": 15,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns electric vehicle",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner detected"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No discounts requested",
+        "points": 10,
+        "matched": true,
+        "evidence": "No price objections"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "email",
+    "priority": "medium",
+    "reason": "Send value-focused email with financing options",
+    "objections": [
+      "\u26a0\ufe0f Price sensitive: Lead with savings, mention $0 down options, 30% tax credit"
+    ],
+    "talking_points": [
+      "Include EV charging in solar design - show total energy independence",
+      "Strong credit (750) = best financing rates available",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 8,
+    "name": "Lisa Martinez",
+    "email": "lisa.martinez@email.com",
+    "phone": "(497) 363-1216",
+    "score": 75,
+    "max_score": 110,
+    "percentage": 68.2,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": false,
+        "evidence": "Roof age unknown"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": true,
+        "evidence": "Credit score: 750"
+      },
+      {
+        "name": "Electric bill $200+/month",
+        "points": 15,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns electric vehicle",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner detected"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No discounts requested",
+        "points": 10,
+        "matched": true,
+        "evidence": "No price objections"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "email",
+    "priority": "medium",
+    "reason": "Send value-focused email with financing options",
+    "objections": [
+      "\u26a0\ufe0f Price sensitive: Lead with savings, mention $0 down options, 30% tax credit"
+    ],
+    "talking_points": [
+      "Include EV charging in solar design - show total energy independence",
+      "Strong credit (750) = best financing rates available",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 9,
+    "name": "Jennifer Thompson",
+    "email": "jennifer.thompson@email.com",
+    "phone": "(785) 273-3105",
+    "score": 70,
+    "max_score": 110,
+    "percentage": 63.6,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 12 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": false,
+        "evidence": "Credit score unknown"
+      },
+      {
+        "name": "Electric bill $200+/month",
+        "points": 15,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns electric vehicle",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner detected"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No discounts requested",
+        "points": 10,
+        "matched": true,
+        "evidence": "No price objections"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "medium",
+    "reason": "Solid lead - call to qualify further",
+    "objections": [],
+    "talking_points": [
+      "Include EV charging in solar design - show total energy independence",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  },
+  {
+    "rank": 10,
+    "name": "Daniel Brown",
+    "email": "daniel.brown@email.com",
+    "phone": "(276) 258-1847",
+    "score": 70,
+    "max_score": 110,
+    "percentage": 63.6,
+    "factors": [
+      {
+        "name": "Responsive (replied within 48hrs)",
+        "points": 20,
+        "matched": true,
+        "evidence": "Quick response time"
+      },
+      {
+        "name": "Roof age < 15 years",
+        "points": 15,
+        "matched": true,
+        "evidence": "Roof is 12 years old"
+      },
+      {
+        "name": "Credit score 700+",
+        "points": 20,
+        "matched": false,
+        "evidence": "Credit score unknown"
+      },
+      {
+        "name": "Electric bill $200+/month",
+        "points": 15,
+        "matched": false,
+        "evidence": "Electric bill unknown"
+      },
+      {
+        "name": "Owns electric vehicle",
+        "points": 10,
+        "matched": true,
+        "evidence": "EV owner detected"
+      },
+      {
+        "name": "No prior solar installation",
+        "points": 5,
+        "matched": false,
+        "evidence": "Solar status unknown"
+      },
+      {
+        "name": "No discounts requested",
+        "points": 10,
+        "matched": true,
+        "evidence": "No price objections"
+      },
+      {
+        "name": "Recent activity (last 7 days)",
+        "points": 15,
+        "matched": true,
+        "evidence": "Active in last 7 days"
+      }
+    ],
+    "action": "call",
+    "priority": "medium",
+    "reason": "Solid lead - call to qualify further",
+    "objections": [],
+    "talking_points": [
+      "Include EV charging in solar design - show total energy independence",
+      "30% Federal Tax Credit available (mention timeline)",
+      "Protection from rising utility rates"
+    ]
+  }
+]

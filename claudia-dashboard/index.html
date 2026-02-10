@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claudia Dashboard - Mission Control</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-yellow: #d29922;
+            --accent-red: #f85149;
+            --accent-purple: #a371f7;
+            --accent-orange: #db6d28;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent-green);
+        }
+        
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .last-update {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            overflow-x: auto;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.25rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        
+        .tab:hover {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+        
+        .tab.active {
+            background: var(--bg-card);
+            color: var(--accent-blue);
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .card-icon {
+            font-size: 1.3rem;
+        }
+        
+        /* System Health Specific */
+        .health-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .health-stat {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .health-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+        
+        .health-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .context-bar {
+            margin-top: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .context-bar-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Status badges */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--accent-green);
+        }
+        
+        .status-pending {
+            background: rgba(210, 153, 34, 0.15);
+            color: var(--accent-yellow);
+        }
+        
+        .status-inactive {
+            background: rgba(248, 81, 73, 0.15);
+            color: var(--accent-red);
+        }
+        
+        .status-complete {
+            background: rgba(163, 113, 247, 0.15);
+            color: var(--accent-purple);
+        }
+        
+        /* Integration table */
+        .integration-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .integration-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .integration-name {
+            font-weight: 500;
+            min-width: 150px;
+        }
+        
+        .integration-details {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            flex: 1;
+            text-align: right;
+        }
+        
+        /* File list */
+        .file-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        
+        .file-item:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .file-icon {
+            font-size: 1.2rem;
+        }
+        
+        .file-name {
+            flex: 1;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.85rem;
+        }
+        
+        .file-date {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+        
+        /* Project cards */
+        .project-item {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+        
+        .project-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .project-meta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .project-meta-item {
+            color: var(--text-secondary);
+        }
+        
+        .project-meta-item span {
+            color: var(--text-primary);
+        }
+        
+        .project-progress {
+            margin-top: 0.75rem;
+        }
+        
+        /* Activity timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.55rem;
+            top: 0.5rem;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            border: 2px solid var(--bg-card);
+        }
+        
+        .timeline-date {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .timeline-action {
+            font-weight: 500;
+        }
+        
+        .timeline-outcome {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Quick actions */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+        }
+        
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        
+        .action-btn:hover {
+            background: var(--bg-primary);
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+        
+        .action-icon {
+            font-size: 1.5rem;
+        }
+        
+        .action-label {
+            font-size: 0.85rem;
+        }
+        
+        /* Skills grid */
+        .skill-category {
+            margin-bottom: 1rem;
+        }
+        
+        .skill-category-title {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .skill-tag {
+            padding: 0.4rem 0.8rem;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+        
+        .skill-tag:hover {
+            color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.1);
+        }
+        
+        /* Identity card */
+        .identity-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.1), rgba(163, 113, 247, 0.1));
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .identity-avatar {
+            font-size: 4rem;
+        }
+        
+        .identity-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .identity-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Folder tree */
+        .folder-tree {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.85rem;
+        }
+        
+        .folder-item {
+            padding: 0.25rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .folder-item::before {
+            content: '├──';
+            position: absolute;
+            left: 0;
+            color: var(--text-secondary);
+        }
+        
+        .folder-item:last-child::before {
+            content: '└──';
+        }
+        
+        .folder-root {
+            padding-left: 0;
+        }
+        
+        .folder-root::before {
+            content: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .health-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: 1rem;
+            }
+            
+            .identity-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        /* Disk usage */
+        .disk-usage {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+        
+        .disk-chart {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(var(--accent-blue) 0% 19%, var(--bg-primary) 19% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .disk-chart-inner {
+            width: 45px;
+            height: 45px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        
+        .disk-info {
+            flex: 1;
+        }
+        
+        .disk-info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .disk-info-row span:last-child {
+            color: var(--text-primary);
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+
+        /* Wide cards */
+        .card-wide {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 900px) {
+            .card-wide {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="logo">🌙</span>
+            <div>
+                <h1>Claudia Dashboard</h1>
+                <p class="header-subtitle">Mission Control • Dave's AI Assistant</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="live-indicator">
+                <span class="live-dot"></span>
+                <span>Live</span>
+            </div>
+            <span class="last-update" id="lastUpdate">Last update: --</span>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Identity Banner -->
+        <div class="identity-card">
+            <div class="identity-avatar">🌙</div>
+            <div class="identity-info">
+                <h2>Claudia</h2>
+                <p>AI Assistant for Dave • Las Vegas (PST) • Solar Entrepreneur Support</p>
+                <p style="margin-top: 0.5rem; color: var(--accent-blue);">Vibe: Direct, casual, helpful</p>
+            </div>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" data-tab="overview">📊 Overview</button>
+            <button class="tab" data-tab="workspace">📁 Workspace</button>
+            <button class="tab" data-tab="integrations">🔌 Integrations</button>
+            <button class="tab" data-tab="projects">📋 Projects</button>
+            <button class="tab" data-tab="skills">⚡ Skills</button>
+            <button class="tab" data-tab="activity">📜 Activity</button>
+            <button class="tab" data-tab="actions">🚀 Quick Actions</button>
+        </div>
+        
+        <!-- Overview Tab -->
+        <div class="tab-content active" id="overview">
+            <div class="grid">
+                <!-- System Health -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title"><span class="card-icon">💓</span> System Health</span>
+                        <span class="status status-active">● Online</span>
+                    </div>
+                    <div class="health-grid">
+                        <div class="health-stat">
+                            <div class="health-stat-value" id="model">claude-opus-4-5</div>
+                            <div class="health-stat-label">Current Model</div>
+                        </div>
+                        <div class="health-stat">
+                            <div class="health-stat-value" id="uptime">9d 6h</div>
+                            <div class="health-stat-label">Server Uptime</div>
+                        </div>
+                        <div class="health-stat">
+                            <div class="health-stat-value" id="subagents">1</div>
+                            <div class="health-stat-label">Active Sub-agents</div>
+                        </div>
+                        <div class="health-stat">
+                            <div class="health-stat-value" id="load">0.07</div>
+                            <div class="health-stat-label">Load Average</div>
+                        </div>
+                    </div>
+                    <div class="context-bar">
+                        <div class="context-bar-header">
+                            <span>Context Usage</span>
+                            <span id="contextText">95k / 262k (36%)</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="contextBar" style="width: 36%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title"><span class="card-icon">📊</span> Quick Stats</span>
+                    </div>
+                    <div class="integration-list">
+                        <div class="integration-item">
+                            <span class="integration-name">📧 Unread Emails</span>
+                            <span class="status status-pending">4 messages</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">📁 Workspace Files</span>
+                            <span>16 files</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">📋 Active Projects</span>
+                            <span>4 projects</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">🔌 Integrations</span>
+                            <span class="status status-active">7/8 active</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">📝 Memory Notes</span>
+                            <span>Last: Feb 1, 2026</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity -->
+                <div class="card card-wide">
+                    <div class="card-header">
+                        <span class="card-title"><span class="card-icon">📜</span> Recent Activity</span>
+                    </div>
+                    <div class="timeline" id="recentTimeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-10 07:02 UTC</div>
+                            <div class="timeline-action">Building Claudia Dashboard</div>
+                            <div class="timeline-outcome">In progress...</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-04 17:57 UTC</div>
+                            <div class="timeline-action">Generated birthday image for Rian</div>
+                            <div class="timeline-outcome">Image delivered via DALL-E</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-02 06:21 UTC</div>
+                            <div class="timeline-action">Started Hot 10 Lead Scoring project</div>
+                            <div class="timeline-outcome">Specs defined, waiting for GHL API</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-01 05:23 UTC</div>
+                            <div class="timeline-action">Analyzed AI marketing automation video</div>
+                            <div class="timeline-outcome">Summary generated</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Workspace Tab -->
+        <div class="tab-content" id="workspace">
+            <div class="grid">
+                <!-- Core Files -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title"><span class="card-icon">📄</span> Core Files</span>
+                    </div>
+                    <div class="file-list">
+                        <div class="file-item">
+                            <span class="file-icon">📘</span>
+                            <span class="file-name">AGENTS.md</span>
+                            <span class="file-date">Feb 1</span>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-icon">💜</span>
+                            <span class="file-name">SOUL.md</span>
+                            <span class="file-date">Feb 1</span>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-icon">👤</span>
+                            <span class="file-name">USER.md</span>
+                            <span class="file-date">Feb 1</span>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-icon">🛠️</span>
+                            <span class="file-name">TOOLS.md</span>
+                            <span class="file-date">Feb 1</span>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-icon">💓</span>
+                            <span class="file-name">HEARTBEAT.md</span>
+                            <span class="file-date">Feb 1</span>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-icon">🪪</span>
+                            <span class="file-name">IDENTITY.md</span>
+                            <span class="file-date">Feb 1</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Files -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title"><span class="card-icon">🕐</span> Recent Files</span>
+                    </div>
+                    <div class="file-list">
+                        <div class="file-item">
+                            <span class="file-icon">🖼️</span>
+                            <span class="file-name">openai-image-gen/prompts.json</span>
+                            <span class="file-date">Feb 4</span>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-icon">📊</span>
+                            <span class="file-name">lead-scoring-dashboard/BUILD_STATUS.md</span>
+                            <span class="file-date">Feb 2</span>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-icon">📝</span>
+                            <span class="file-name">ai-agents-productivity-strategies.md</span>
+                            <span class="file-date">Feb 1</span>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-icon">🎬</span>
+                            <span class="file-name">video_analysis/ai_marketing_summary.md</span>
+                            <span class="file-date">Feb 1</span>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-icon">📔</span>
+                            <span class="file-name">memory/2026-02-01.md</span>
+                            <span class="file-date">Feb 1</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Folder Structure -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title"><span class="card-icon">📂</span> Folder Structure</span>
+                    </div>
+                    <div class="folder-tree">
+                        <div class="folder-item folder-root">📁 workspace/</div>
+                        <div class="folder-item">📁 memory/</div>
+                        <div class="folder-item">📁 lead-scoring-dashboard/</div>
+                        <div class="folder-item">📁 video_analysis/</div>
+                        <div class="folder-item">📁 claudia-dashboard/</div>
+                        <div class="folder-item">📁 tmp/</div>
+                    </div>
+                </div>
+                
+                <!-- Disk Usage -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title"><span class="card-icon">💾</span> Disk Usage</span>
+                    </div>
+                    <div class="disk-usage">
+                        <div class="disk-chart">
+                            <div class="disk-chart-inner">19%</div>
+                        </div>
+                        <div class="disk-info">
+                            <div class="disk-info-row">
+                                <span>Total:</span>
+                                <span>29 GB</span>
+                            </div>
+                            <div class="disk-info-row">
+                                <span>Used:</span>
+                                <span>5.5 GB</span>
+                            </div>
+                            <div class="disk-info-row">
+                                <span>Available:</span>
+                                <span>24 GB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Memory Status -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title"><span class="card-icon">🧠</span> Memory Status</span>
+                    </div>
+                    <div class="integration-list">
+                        <div class="integration-item">
+                            <span class="integration-name">Today's Note</span>
+                            <span class="status status-inactive">Not created</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">Last Note</span>
+                            <span>2026-02-01.md</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">MEMORY.md</span>
+                            <span class="status status-inactive">Not created</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">Notes Count</span>
+                            <span>1 file</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Integrations Tab -->
+        <div class="tab-content" id="integrations">
+            <div class="grid">
+                <div class="card card-wide">
+                    <div class="card-header">
+                        <span class="card-title"><span class="card-icon">🔌</span> Integration Status</span>
+                        <span class="status status-active">7/8 Active</span>
+                    </div>
+                    <div class="integration-list">
+                        <div class="integration-item">
+                            <span class="integration-name">📧 Email (Himalaya)</span>
+                            <span class="status status-active">● Active</span>
+                            <span class="integration-details">claudiadavesva@gmail.com • 4 unread</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">💬 Telegram</span>
+                            <span class="status status-active">● Active</span>
+                            <span class="integration-details">Connected to Dave</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">🐙 GitHub</span>
+                            <span class="status status-active">● Active</span>
+                            <span class="integration-details">Workspace repo initialized</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">📊 GHL (GoHighLevel)</span>
+                            <span class="status status-pending">◐ Pending</span>
+                            <span class="integration-details">Waiting for API key from Dave</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">🎬 YouTube/Transcription</span>
+                            <span class="status status-active">● Active</span>
+                            <span class="integration-details">yt-dlp v2026.01.31</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">🎨 Image Generation</span>
+                            <span class="status status-active">● Active</span>
+                            <span class="integration-details">OpenAI DALL-E connected</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">🌙 Moonshot/Kimi</span>
+                            <span class="status status-active">● Active</span>
+                            <span class="integration-details">API key configured</span>
+                        </div>
+                        <div class="integration-item">
+                            <span class="integration-name">🎤 Voice Transcription</span>
+                            <span class="status status-active">● Active</span>
+                            <span class="integration-details">OpenAI Whisper via Telegram</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Projects Tab -->
+        <div class="tab-content" id="projects">
+            <div class="grid">
+                <div class="card card-wide">
+                    <div class="card-header">
+                        <span class="card-title"><span class="card-icon">📋</span> Active Projects</span>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-header">
+                            <span class="project-name">🔥 Hot 10 Lead Scoring Dashboard</span>
+                            <span class="status status-pending">In Progress</span>
+                        </div>
+                        <div class="project-meta">
+                            <div class="project-meta-item">Blocker: <span style="color: var(--accent-yellow)">Waiting for GHL API key</span></div>
+                            <div class="project-meta-item">Next Step: <span>Configure GHL API connector</span></div>
+                            <div class="project-meta-item">Last Updated: <span>2026-02-02</span></div>
+                            <div class="project-meta-item">Progress: <span>15%</span></div>
+                        </div>
+                        <div class="project-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 15%; background: var(--accent-yellow)"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-header">
+                            <span class="project-name">🌙 Claudia Dashboard</span>
+                            <span class="status status-pending">In Progress</span>
+                        </div>
+                        <div class="project-meta">
+                            <div class="project-meta-item">Blocker: <span style="color: var(--accent-green)">None</span></div>
+                            <div class="project-meta-item">Next Step: <span>Building now</span></div>
+                            <div class="project-meta-item">Last Updated: <span>2026-02-10</span></div>
+                            <div class="project-meta-item">Progress: <span>80%</span></div>
+                        </div>
+                        <div class="project-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-header">
+                            <span class="project-name">📝 Tim Agreement Review</span>
+                            <span class="status status-complete">Complete</span>
+                        </div>
+                        <div class="project-meta">
+                            <div class="project-meta-item">Blocker: <span style="color: var(--accent-green)">None</span></div>
+                            <div class="project-meta-item">Next Step: <span>Delivered</span></div>
+                            <div class="project-meta-item">Last Updated: <span>2026-02-01</span></div>
+                            <div class="project-meta-item">Progress: <span>100%</span></div>
+                        </div>
+                        <div class="project-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%; background: var(--accent-purple)"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-header">
+                            <span class="project-name">⚙️ Claudia Setup & Configuration</span>
+                            <span class="status status-complete">Complete</span>
+                        </div>
+                        <div class="project-meta">
+                            <div class="project-meta-item">Blocker: <span style="color: var(--accent-green)">None</span></div>
+                            <div class="project-meta-item">Next Step: <span>Maintenance mode</span></div>
+                            <div class="project-meta-item">Last Updated: <span>2026-02-01</span></div>
+                            <div class="project-meta-item">Progress: <span>100%</span></div>
+                        </div>
+                        <div class="project-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%; background: var(--accent-purple)"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Skills Tab -->
+        <div class="tab-content" id="skills">
+            <div class="grid">
+                <div class="card card-wide">
+                    <div class="card-header">
+                        <span class="card-title"><span class="card-icon">⚡</span> Skills Arsenal</span>
+                        <span class="status status-active">Core Skills Active</span>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <div class="skill-category-title">🌐 Web & Research</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">web_search</span>
+                            <span class="skill-tag">web_fetch</span>
+                            <span class="skill-tag">browser</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <div class="skill-category-title">📧 Communication</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">email (himalaya)</span>
+                            <span class="skill-tag">telegram</span>
+                            <span class="skill-tag">message</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <div class="skill-category-title">🎬 Media</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">yt-dlp</span>
+                            <span class="skill-tag">image_gen (DALL-E)</span>
+                            <span class="skill-tag">image_analysis</span>
+                            <span class="skill-tag">voice_transcription</span>
+                            <span class="skill-tag">tts</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <div class="skill-category-title">📁 File Operations</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">read</span>
+                            <span class="skill-tag">write</span>
+                            <span class="skill-tag">edit</span>
+                            <span class="skill-tag">exec</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <div class="skill-category-title">🤖 AI & Automation</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">moonshot/kimi</span>
+                            <span class="skill-tag">openai</span>
+                            <span class="skill-tag">canvas</span>
+                            <span class="skill-tag">nodes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <div class="skill-category-title">🛠️ System</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">process</span>
+                            <span class="skill-tag">gateway</span>
+                            <span class="skill-tag">cron</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Activity Tab -->
+        <div class="tab-content" id="activity">
+            <div class="grid">
+                <div class="card card-wide">
+                    <div class="card-header">
+                        <span class="card-title"><span class="card-icon">📜</span> Full Activity Log</span>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-10 07:02 UTC</div>
+                            <div class="timeline-action">Building Claudia Dashboard</div>
+                            <div class="timeline-outcome">In progress - Mission Control interface</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-04 17:57 UTC</div>
+                            <div class="timeline-action">Generated birthday image for Rian</div>
+                            <div class="timeline-outcome">Image delivered via DALL-E → tmp/openai-image-gen-2026-02-04/</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-02 06:21 UTC</div>
+                            <div class="timeline-action">Started Hot 10 Lead Scoring project</div>
+                            <div class="timeline-outcome">Specs defined, scoring weights configured, waiting for GHL API</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-01 05:23 UTC</div>
+                            <div class="timeline-action">Analyzed AI marketing automation video</div>
+                            <div class="timeline-outcome">Summary generated → video_analysis/ai_marketing_automation_summary.md</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-01 05:04 UTC</div>
+                            <div class="timeline-action">Created identity profile</div>
+                            <div class="timeline-outcome">IDENTITY.md created</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-01 05:02 UTC</div>
+                            <div class="timeline-action">Generated Claudia avatar image</div>
+                            <div class="timeline-outcome">DALL-E avatar created</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-01 05:00 UTC</div>
+                            <div class="timeline-action">Generated solar panel image</div>
+                            <div class="timeline-outcome">Image for Dave's solar business</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-01 03:45 UTC</div>
+                            <div class="timeline-action">Started daily memory notes</div>
+                            <div class="timeline-outcome">memory/2026-02-01.md created</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-01 02:13 UTC</div>
+                            <div class="timeline-action">Email system fully configured</div>
+                            <div class="timeline-outcome">Send/receive working with himalaya CLI</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-01 01:29 UTC</div>
+                            <div class="timeline-action">USER.md configured</div>
+                            <div class="timeline-outcome">Dave's profile set up - Las Vegas, PST, solar</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-01 01:27 UTC</div>
+                            <div class="timeline-action">Soul configuration updated</div>
+                            <div class="timeline-outcome">Personality and vibe defined in SOUL.md</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2026-02-01 01:07 UTC</div>
+                            <div class="timeline-action">🎉 Initial Setup Complete</div>
+                            <div class="timeline-outcome">Claudia is born! Workspace initialized.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Actions Tab -->
+        <div class="tab-content" id="actions">
+            <div class="grid">
+                <div class="card card-wide">
+                    <div class="card-header">
+                        <span class="card-title"><span class="card-icon">🚀</span> Quick Actions</span>
+                    </div>
+                    <div class="action-grid">
+                        <a href="#" class="action-btn" onclick="alert('Run: /status')">
+                            <span class="action-icon">📊</span>
+                            <span class="action-label">Check Status</span>
+                        </a>
+                        <a href="#" class="action-btn" onclick="alert('Run: /clear')">
+                            <span class="action-icon">🧹</span>
+                            <span class="action-label">Clear Context</span>
+                        </a>
+                        <a href="#" class="action-btn" onclick="alert('Run: openclaw gateway restart')">
+                            <span class="action-icon">🔄</span>
+                            <span class="action-label">Restart Gateway</span>
+                        </a>
+                        <a href="#" class="action-btn" onclick="alert('Command: himalaya envelope list')">
+                            <span class="action-icon">📧</span>
+                            <span class="action-label">Check Email</span>
+                        </a>
+                        <a href="#" class="action-btn" onclick="alert('View: SOUL.md')">
+                            <span class="action-icon">💜</span>
+                            <span class="action-label">View Soul</span>
+                        </a>
+                        <a href="#" class="action-btn" onclick="alert('View: MEMORY.md')">
+                            <span class="action-icon">🧠</span>
+                            <span class="action-label">View Memory</span>
+                        </a>
+                        <a href="#" class="action-btn" onclick="alert('Spawn sub-agent for task')">
+                            <span class="action-icon">🤖</span>
+                            <span class="action-label">Spawn Sub-agent</span>
+                        </a>
+                        <a href="#" class="action-btn" onclick="alert('View: memory/2026-02-01.md')">
+                            <span class="action-icon">📔</span>
+                            <span class="action-label">Daily Notes</span>
+                        </a>
+                        <a href="#" class="action-btn" onclick="alert('Run: df -h')">
+                            <span class="action-icon">💾</span>
+                            <span class="action-label">Disk Usage</span>
+                        </a>
+                        <a href="#" class="action-btn" onclick="alert('View: lead-scoring-dashboard/')">
+                            <span class="action-icon">🔥</span>
+                            <span class="action-label">Hot 10 Project</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active from all tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active to clicked tab
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+        
+        // Update last update time
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('lastUpdate').textContent = 
+                `Last update: ${now.toLocaleTimeString()}`;
+        }
+        
+        // Auto-refresh every 60 seconds
+        setInterval(updateTime, 60000);
+        updateTime();
+        
+        // Load data from JSON (for future dynamic updates)
+        async function loadDashboardData() {
+            try {
+                const response = await fetch('dashboard-data.json');
+                const data = await response.json();
+                console.log('Dashboard data loaded:', data);
+                // Future: Update DOM with live data
+            } catch (e) {
+                console.log('Running with static data');
+            }
+        }
+        
+        loadDashboardData();
+    </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+{
+  "generated": "2026-02-10T07:02:23Z",
+  "system": {
+    "model": "anthropic/claude-opus-4-5",
+    "contextUsage": {
+      "used": 95000,
+      "max": 262000,
+      "percent": 36
+    },
+    "serverUptime": "9 days, 6 hours",
+    "loadAverage": "0.07, 0.02, 0.00"
+  },
+  "workspace": {
+    "totalFiles": 16,
+    "diskUsage": {
+      "total": "29G",
+      "used": "5.5G",
+      "available": "24G",
+      "percent": 19
+    },
+    "folders": [
+      "memory",
+      "lead-scoring-dashboard",
+      "video_analysis",
+      "tmp",
+      "claudia-dashboard"
+    ],
+    "coreFiles": [
+      "AGENTS.md",
+      "SOUL.md",
+      "USER.md",
+      "TOOLS.md",
+      "HEARTBEAT.md",
+      "IDENTITY.md"
+    ],
+    "recentFiles": [
+      {"name": "openai-image-gen/prompts.json", "date": "2026-02-04"},
+      {"name": "lead-scoring-dashboard/BUILD_STATUS.md", "date": "2026-02-02"},
+      {"name": "ai-agents-productivity-strategies.md", "date": "2026-02-01"},
+      {"name": "video_analysis/ai_marketing_automation_summary.md", "date": "2026-02-01"},
+      {"name": "memory/2026-02-01.md", "date": "2026-02-01"}
+    ],
+    "memoryFiles": {
+      "today": "2026-02-10.md",
+      "todayExists": false,
+      "lastNote": "2026-02-01.md",
+      "memoryMd": false
+    }
+  },
+  "integrations": [
+    {
+      "name": "Email (Himalaya)",
+      "status": "active",
+      "details": "claudiadavesva@gmail.com",
+      "extra": "4 unread messages"
+    },
+    {
+      "name": "Telegram",
+      "status": "active",
+      "details": "Connected to Dave"
+    },
+    {
+      "name": "GitHub",
+      "status": "active",
+      "details": "Workspace repo initialized"
+    },
+    {
+      "name": "GHL",
+      "status": "pending",
+      "details": "Waiting for API key from Dave"
+    },
+    {
+      "name": "YouTube/Transcription",
+      "status": "active",
+      "details": "yt-dlp v2026.01.31"
+    },
+    {
+      "name": "Image Generation",
+      "status": "active",
+      "details": "OpenAI DALL-E connected"
+    },
+    {
+      "name": "Moonshot/Kimi",
+      "status": "active",
+      "details": "API key configured"
+    },
+    {
+      "name": "Voice Transcription",
+      "status": "active",
+      "details": "OpenAI Whisper via Telegram"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Hot 10 Lead Scoring Dashboard",
+      "status": "in-progress",
+      "blocker": "Waiting for GHL API key",
+      "nextStep": "Configure GHL API connector",
+      "lastUpdated": "2026-02-02",
+      "progress": 15
+    },
+    {
+      "name": "Tim Agreement Review",
+      "status": "complete",
+      "blocker": null,
+      "nextStep": "Delivered",
+      "lastUpdated": "2026-02-01",
+      "progress": 100
+    },
+    {
+      "name": "Claudia Setup & Config",
+      "status": "complete",
+      "blocker": null,
+      "nextStep": "Maintenance mode",
+      "lastUpdated": "2026-02-01",
+      "progress": 100
+    },
+    {
+      "name": "Claudia Dashboard",
+      "status": "in-progress",
+      "blocker": null,
+      "nextStep": "Building now",
+      "lastUpdated": "2026-02-10",
+      "progress": 80
+    }
+  ],
+  "activity": [
+    {
+      "date": "2026-02-10",
+      "time": "07:02",
+      "action": "Building Claudia Dashboard",
+      "outcome": "In progress"
+    },
+    {
+      "date": "2026-02-04",
+      "time": "17:57",
+      "action": "Generated birthday image for Rian",
+      "outcome": "Image delivered"
+    },
+    {
+      "date": "2026-02-02",
+      "time": "06:21",
+      "action": "Started Hot 10 Lead Scoring project",
+      "outcome": "Specs defined, waiting for API"
+    },
+    {
+      "date": "2026-02-01",
+      "time": "05:23",
+      "action": "Analyzed AI marketing automation video",
+      "outcome": "Summary generated"
+    },
+    {
+      "date": "2026-02-01",
+      "time": "05:04",
+      "action": "Created identity profile",
+      "outcome": "IDENTITY.md created"
+    },
+    {
+      "date": "2026-02-01",
+      "time": "03:45",
+      "action": "Started daily memory notes",
+      "outcome": "memory/2026-02-01.md"
+    },
+    {
+      "date": "2026-02-01",
+      "time": "02:13",
+      "action": "Email system configured",
+      "outcome": "Send/receive working"
+    },
+    {
+      "date": "2026-02-01",
+      "time": "01:27",
+      "action": "Soul configuration updated",
+      "outcome": "Personality defined"
+    }
+  ],
+  "identity": {
+    "name": "Claudia 🌙",
+    "human": "Dave",
+    "location": "Las Vegas (PST)",
+    "role": "Solar entrepreneur assistant",
+    "vibe": "Direct, casual, helpful"
+  }
+}

@@ -100,6 +100,43 @@
             font-size: 0.85rem;
         }
         
+        .update-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        
+        .update-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(88, 166, 255, 0.4);
+        }
+        
+        .update-btn:disabled {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .update-btn.spinning::before {
+            content: "↻";
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
         .container {
             max-width: 1600px;
             margin: 0 auto;
@@ -675,6 +712,10 @@
                 <span>Live</span>
             </div>
             <span class="last-update" id="lastUpdate">Last update: --</span>
+            <button class="update-btn" id="updateBtn" onclick="refreshDashboard()">
+                <span>↻</span>
+                <span>Update</span>
+            </button>
         </div>
     </header>
     
@@ -1314,6 +1355,64 @@
         }
         
         loadDashboardData();
+        
+        // Refresh dashboard - reload page to get latest data
+        async function refreshDashboard() {
+            const btn = document.getElementById('updateBtn');
+            const originalText = btn.innerHTML;
+            
+            // Show loading state
+            btn.disabled = true;
+            btn.classList.add('spinning');
+            btn.innerHTML = '<span>⟳</span><span>Updating...</span>';
+            
+            try {
+                // Try to fetch latest data first
+                const response = await fetch('dashboard-data.json?t=' + Date.now());
+                const data = await response.json();
+                
+                // Update timestamp display
+                if (data.lastUpdated) {
+                    const date = new Date(data.lastUpdated);
+                    document.getElementById('lastUpdate').textContent = 
+                        `Last update: ${date.toLocaleString()}`;
+                }
+                
+                // Force page reload to refresh all content
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
+                
+            } catch (e) {
+                // If fetch fails, just reload
+                window.location.reload();
+            }
+        }
+        
+        // Update display with actual data from JSON
+        async function updateDashboardDisplay() {
+            try {
+                const response = await fetch('dashboard-data.json?t=' + Date.now());
+                const data = await response.json();
+                
+                if (data.lastUpdated) {
+                    const date = new Date(data.lastUpdated);
+                    document.getElementById('lastUpdate').textContent = 
+                        `Last update: ${date.toLocaleString()}`;
+                }
+                
+                if (data.system && data.system.model) {
+                    const modelEl = document.getElementById('model');
+                    if (modelEl) modelEl.textContent = data.system.model;
+                }
+                
+            } catch (e) {
+                console.log('Using static data');
+            }
+        }
+        
+        // Load actual data on page load
+        updateDashboardDisplay();
     </script>
 </body>
 </html>

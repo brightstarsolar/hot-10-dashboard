@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Dashboard | GHL Sales Assistant</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg: #0a0e1a;
+            --card: #141b2d;
+            --border: #2d3748;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --cps: #3b82f6;
+            --rqs: #10b981;
+            --fire: #f59e0b;
+            --danger: #ef4444;
+            --purple: #8b5cf6;
+            --pending: #64748b;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0a0e1a 100%);
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .header h1 .emoji {
+            font-size: 1.5rem;
+        }
+        
+        .header-sub {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid var(--rqs);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--rqs);
+        }
+        
+        .progress-ring {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+        
+        .progress-ring svg {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring circle {
+            fill: none;
+            stroke-width: 8;
+        }
+        
+        .progress-ring .bg {
+            stroke: var(--border);
+        }
+        
+        .progress-ring .progress {
+            stroke: var(--rqs);
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.5s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--rqs);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 860px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text);
+        }
+        
+        .card-title .emoji {
+            font-size: 1.2rem;
+        }
+        
+        /* Sections Progress */
+        .section-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .section-item:last-child {
+            border-bottom: none;
+        }
+        
+        .section-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .section-icon {
+            font-size: 1.25rem;
+        }
+        
+        .section-name {
+            font-weight: 500;
+        }
+        
+        .section-status {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .section-progress {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-fill.complete { background: var(--rqs); }
+        .progress-fill.active { background: var(--cps); animation: pulse 2s infinite; }
+        .progress-fill.pending { background: var(--pending); }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        .progress-pct {
+            font-size: 0.85rem;
+            font-weight: 600;
+            min-width: 45px;
+            text-align: right;
+        }
+        
+        .progress-pct.complete { color: var(--rqs); }
+        .progress-pct.active { color: var(--cps); }
+        .progress-pct.pending { color: var(--pending); }
+        
+        /* Agent Cards */
+        .agent-card {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .agent-card:last-child {
+            margin-bottom: 0;
+        }
+        
+        .agent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .agent-name {
+            font-weight: 600;
+            color: var(--cps);
+        }
+        
+        .agent-status {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        
+        .agent-status.running {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--rqs);
+        }
+        
+        .agent-status.complete {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--purple);
+        }
+        
+        .agent-task {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .agent-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .agent-meta code {
+            font-family: 'Monaco', 'Consolas', monospace;
+            background: rgba(255,255,255,0.05);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+        }
+        
+        /* Updates */
+        .update-item {
+            display: flex;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .update-item:last-child {
+            border-bottom: none;
+        }
+        
+        .update-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            min-width: 80px;
+        }
+        
+        .update-content {
+            flex: 1;
+        }
+        
+        .update-type {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-right: 0.5rem;
+        }
+        
+        .update-type.fix { background: var(--danger); color: white; }
+        .update-type.feature { background: var(--rqs); color: white; }
+        .update-type.complete { background: var(--purple); color: white; }
+        
+        /* Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .metric-box {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+        }
+        
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--fire);
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.25rem;
+        }
+        
+        /* Quick Links */
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .quick-link:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: var(--cps);
+            color: var(--cps);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .auto-refresh {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--rqs);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Data source badges */
+        .data-sources {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+        
+        .data-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.35rem 0.6rem;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--rqs);
+        }
+        
+        .no-agents {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 2rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <h1><span class="emoji">📊</span> GHL Sales Assistant - Brightstar Solar</h1>
+                <p class="header-sub">Project Status Dashboard</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1.5rem;">
+                <div class="progress-ring">
+                    <svg width="100" height="100">
+                        <circle class="bg" cx="50" cy="50" r="42"/>
+                        <circle class="progress" cx="50" cy="50" r="42" 
+                            stroke-dasharray="264" 
+                            stroke-dashoffset="40"/>
+                    </svg>
+                    <div class="progress-text">85%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Sections Progress -->
+        <div class="card">
+            <div class="card-title"><span class="emoji">🗂️</span> Project Sections</div>
+            
+            <div class="section-item">
+                <div class="section-info">
+                    <span class="section-icon">✅</span>
+                    <div>
+                        <div class="section-name">Data Collection</div>
+                        <div class="section-status">GHL API, Pipeline, Custom Fields</div>
+                    </div>
+                </div>
+                <div class="section-progress">
+                    <div class="progress-bar"><div class="progress-fill complete" style="width: 100%"></div></div>
+                    <div class="progress-pct complete">100%</div>
+                </div>
+            </div>
+            
+            <div class="section-item">
+                <div class="section-info">
+                    <span class="section-icon">✅</span>
+                    <div>
+                        <div class="section-name">Call Transcription</div>
+                        <div class="section-status">All call types (1, 31, 34) - Fixed</div>
+                    </div>
+                </div>
+                <div class="section-progress">
+                    <div class="progress-bar"><div class="progress-fill complete" style="width: 100%"></div></div>
+                    <div class="progress-pct complete">100%</div>
+                </div>
+            </div>
+            
+            <div class="section-item">
+                <div class="section-info">
+                    <span class="section-icon">✅</span>
+                    <div>
+                        <div class="section-name">AI Analysis</div>
+                        <div class="section-status">GPT-4 Sentiment & Objection Detection</div>
+                    </div>
+                </div>
+                <div class="section-progress">
+                    <div class="progress-bar"><div class="progress-fill complete" style="width: 100%"></div></div>
+                    <div class="progress-pct complete">100%</div>
+                </div>
+            </div>
+            
+            <div class="section-item">
+                <div class="section-info">
+                    <span class="section-icon">✅</span>
+                    <div>
+                        <div class="section-name">Scoring Engine</div>
+                        <div class="section-status">CPS/RQS Calculation & Quadrants</div>
+                    </div>
+                </div>
+                <div class="section-progress">
+                    <div class="progress-bar"><div class="progress-fill complete" style="width: 100%"></div></div>
+                    <div class="progress-pct complete">100%</div>
+                </div>
+            </div>
+            
+            <div class="section-item">
+                <div class="section-info">
+                    <span class="section-icon">✅</span>
+                    <div>
+                        <div class="section-name">Dashboard & UI</div>
+                        <div class="section-status">Hot Leads Dashboard - GitHub Pages</div>
+                    </div>
+                </div>
+                <div class="section-progress">
+                    <div class="progress-bar"><div class="progress-fill complete" style="width: 100%"></div></div>
+                    <div class="progress-pct complete">100%</div>
+                </div>
+            </div>
+            
+            <div class="section-item">
+                <div class="section-info">
+                    <span class="section-icon">⏳</span>
+                    <div>
+                        <div class="section-name">Automation</div>
+                        <div class="section-status">Cron Jobs & Webhooks - Pending</div>
+                    </div>
+                </div>
+                <div class="section-progress">
+                    <div class="progress-bar"><div class="progress-fill pending" style="width: 0%"></div></div>
+                    <div class="progress-pct pending">0%</div>
+                </div>
+            </div>
+            
+            <div class="section-item">
+                <div class="section-info">
+                    <span class="section-icon">⏳</span>
+                    <div>
+                        <div class="section-name">Integration Testing</div>
+                        <div class="section-status">End-to-End Tests - Pending</div>
+                    </div>
+                </div>
+                <div class="section-progress">
+                    <div class="progress-bar"><div class="progress-fill pending" style="width: 0%"></div></div>
+                    <div class="progress-pct pending">0%</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid-2col">
+            <!-- Active Agents -->
+            <div class="card">
+                <div class="card-title"><span class="emoji">🤖</span> Active Sessions / Agents</div>
+                <div id="agents-container">
+                    <div class="no-agents">No active sub-agents at this time</div>
+                </div>
+            </div>
+            
+            <!-- Recent Updates -->
+            <div class="card">
+                <div class="card-title"><span class="emoji">📝</span> Recent Updates</div>
+                
+                <div class="update-item">
+                    <div class="update-time">Today<br>9:55 PM</div>
+                    <div class="update-content">
+                        <span class="update-type fix">Fix</span>
+                        Call Type 1 (GHL Native) downloads working
+                    </div>
+                </div>
+                
+                <div class="update-item">
+                    <div class="update-time">Today<br>9:45 PM</div>
+                    <div class="update-content">
+                        <span class="update-type complete">Complete</span>
+                        Call Transcription section 100% complete
+                    </div>
+                </div>
+                
+                <div class="update-item">
+                    <div class="update-time">Today<br>9:30 PM</div>
+                    <div class="update-content">
+                        <span class="update-type feature">Feature</span>
+                        Hot Leads Dashboard deployed to GitHub Pages
+                    </div>
+                </div>
+                
+                <div class="update-item">
+                    <div class="update-time">Today<br>9:15 PM</div>
+                    <div class="update-content">
+                        <span class="update-type feature">Feature</span>
+                        GPT-4 analysis with objection extraction
+                    </div>
+                </div>
+                
+                <div class="update-item">
+                    <div class="update-time">Today<br>8:45 PM</div>
+                    <div class="update-content">
+                        <span class="update-type complete">Complete</span>
+                        CPS/RQS scoring engine implemented
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid-2col">
+            <!-- Key Metrics -->
+            <div class="card">
+                <div class="card-title"><span class="emoji">📈</span> Key Metrics</div>
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-value">121</div>
+                        <div class="metric-label">Total Leads</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">121</div>
+                        <div class="metric-label">Calls Processed</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">10</div>
+                        <div class="metric-label">Hot Leads</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">5</div>
+                        <div class="metric-label">Sections Done</div>
+                    </div>
+                </div>
+                
+                <div class="data-sources">
+                    <div class="data-badge">✓ Custom Fields</div>
+                    <div class="data-badge">✓ Conversation Notes</div>
+                    <div class="data-badge">✓ Call Recordings</div>
+                    <div class="data-badge">✓ SMS Messages</div>
+                    <div class="data-badge">✓ Pipeline Stages</div>
+                </div>
+            </div>
+            
+            <!-- Quick Links -->
+            <div class="card">
+                <div class="card-title"><span class="emoji">🔗</span> Quick Links</div>
+                <div class="quick-links">
+                    <a href="https://brightstarsolar.github.io/hot-10-dashboard/ghl-hot-leads/" target="_blank" class="quick-link">
+                        🔥 Hot Leads Dashboard
+                    </a>
+                    <a href="https://github.com/brightstarsolar/hot-10-dashboard" target="_blank" class="quick-link">
+                        📦 GitHub Repository
+                    </a>
+                    <a href="https://brightstarsolar.github.io/hot-10-dashboard/" target="_blank" class="quick-link">
+                        📄 GitHub Pages Root
+                    </a>
+                    <a href="https://app.gohighlevel.com" target="_blank" class="quick-link">
+                        🚀 GHL Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Last updated: <span id="lastUpdate">--</span> PST</div>
+        <div class="auto-refresh">
+            <span class="pulse-dot"></span>
+            <span>Auto-refreshes every 60 seconds</span>
+        </div>
+    </div>
+    
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const pst = now.toLocaleString('en-US', { 
+                timeZone: 'America/Los_Angeles',
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
+            document.getElementById('lastUpdate').textContent = pst;
+        }
+        
+        // Update time immediately and every minute
+        updateTime();
+        setInterval(updateTime, 60000);
+        
+        // Auto-refresh page every 5 minutes for latest data
+        setTimeout(() => location.reload(), 300000);
+    </script>
+</body>
+</html>

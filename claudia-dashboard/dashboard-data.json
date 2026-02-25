@@ -1,63 +1,28 @@
 {
-  "lastUpdated": "2026-02-13T04:34:39Z",
+  "lastUpdated": "2026-02-25T04:53:38Z",
+  "localTime": "2026-02-25 04:53 UTC",
   "system": {
     "model": "moonshot/kimi-k2.5",
     "contextUsed": "96k",
     "contextTotal": "262k",
     "contextPercent": "37%",
-    "uptime": "13+ days",
+    "uptimeDays": 24,
     "sessionKey": "agent:main:main",
     "status": "active"
   },
   "workspace": {
-    "totalFiles": 11,
-    "recentFiles": [
-      ".email_last_check",
-      ".check-email.sh",
-      "gamma-style-marketing-report.html",
-      "ccfap-marketing-report.html",
-      "ai-agents-productivity-strategies.md"
-    ],
-    "diskUsed": "6.1G",
-    "diskTotal": "29G",
-    "diskPercent": "21%"
+    "totalFiles": 44,
+    "recentFiles": ["update-dashboard.sh"],
+    "diskUsedPercent": 22
   },
   "integrations": [
-    {
-      "name": "Email (Himalaya)",
-      "status": "active",
-      "details": "claudiadavesva@gmail.com"
-    },
-    {
-      "name": "Telegram",
-      "status": "active",
-      "details": "Connected to Dave"
-    },
-    {
-      "name": "GitHub",
-      "status": "active",
-      "details": "hot-10-dashboard repo deployed"
-    },
-    {
-      "name": "Google Sheets",
-      "status": "active",
-      "details": "Connected to CCFAP Leads"
-    },
-    {
-      "name": "Image Gen",
-      "status": "active",
-      "details": "OpenAI connected"
-    },
-    {
-      "name": "Kimi API",
-      "status": "active",
-      "details": "Moonshot configured - CURRENT MODEL"
-    },
-    {
-      "name": "Last30Days Skill",
-      "status": "active",
-      "details": "Just installed"
-    }
+    {"name": "Email (Himalaya)", "status": "active", "details": "claudiadavesva@gmail.com"},
+    {"name": "Telegram", "status": "active", "details": "Connected to Dave"},
+    {"name": "GitHub", "status": "active", "details": "hot-10-dashboard repo"},
+    {"name": "Google Sheets", "status": "active", "details": "Connected to CCFAP Leads"},
+    {"name": "Image Gen", "status": "active", "details": "OpenAI connected"},
+    {"name": "Kimi API", "status": "active", "details": "Moonshot configured"},
+    {"name": "Last30Days Skill", "status": "active", "details": "Research tool ready"}
   ],
   "projects": [
     {
@@ -65,50 +30,34 @@
       "status": "deployed",
       "progress": 85,
       "blocker": "Waiting for Bubble API connection",
-      "nextStep": "Connect Bubble sales data"
+      "nextStep": "Connect sales data"
     },
     {
       "name": "Weekly Marketing Reports",
       "status": "building",
       "progress": 70,
-      "blocker": "Need Bubble sales data integration",
-      "nextStep": "Match leads to sales"
+      "blocker": "Need sales data integration",
+      "nextStep": "Automate report generation"
     },
     {
       "name": "Claudia Dashboard",
       "status": "live",
       "progress": 100,
       "blocker": null,
-      "nextStep": "Auto-refresh now fixed"
+      "nextStep": "Auto-refresh working"
     },
     {
-      "name": "Last30Days Skill",
+      "name": "Sales Meeting Topics",
       "status": "active",
       "progress": 100,
       "blocker": null,
-      "nextStep": "Ready for research queries"
+      "nextStep": "Weekly updates ready"
     }
   ],
   "recentActivity": [
-    {
-      "time": "04:34",
-      "action": "Fixed dashboard auto-update"
-    },
-    {
-      "time": "04:25",
-      "action": "Installed last30days skill"
-    },
-    {
-      "time": "03:27",
-      "action": "Research: Residential solar finance news"
-    },
-    {
-      "time": "03:11",
-      "action": "Connected Google Sheets API"
-    },
-    {
-      "time": "02:49",
-      "action": "Built Gamma-style marketing report"
-    }
+    {"time": "04:53", "action": "Dashboard auto-updated"},
+    {"time": "Recent", "action": "Sales meeting topics generated"},
+    {"time": "Recent", "action": "Google Sheets connected"},
+    {"time": "Feb 13", "action": "Update button added to dashboard"}
   ]
 }

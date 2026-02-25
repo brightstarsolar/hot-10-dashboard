@@ -711,7 +711,7 @@
                 <span class="live-dot"></span>
                 <span>Live</span>
             </div>
-            <span class="last-update" id="lastUpdate">Last update: --</span>
+            <span class="last-update" id="lastUpdate">Last update: 2026-02-25 04:53 UTC
             <button class="update-btn" id="updateBtn" onclick="refreshDashboard()">
                 <span>↻</span>
                 <span>Update</span>
@@ -1335,7 +1335,7 @@
         function updateTime() {
             const now = new Date();
             document.getElementById('lastUpdate').textContent = 
-                `Last update: ${now.toLocaleTimeString()}`;
+                `Last update: 2026-02-25 04:53 UTC
         }
         
         // Auto-refresh every 60 seconds
@@ -1375,7 +1375,7 @@
                 if (data.lastUpdated) {
                     const date = new Date(data.lastUpdated);
                     document.getElementById('lastUpdate').textContent = 
-                        `Last update: ${date.toLocaleString()}`;
+                        `Last update: 2026-02-25 04:53 UTC
                 }
                 
                 // Force page reload to refresh all content
@@ -1398,7 +1398,7 @@
                 if (data.lastUpdated) {
                     const date = new Date(data.lastUpdated);
                     document.getElementById('lastUpdate').textContent = 
-                        `Last update: ${date.toLocaleString()}`;
+                        `Last update: 2026-02-25 04:53 UTC
                 }
                 
                 if (data.system && data.system.model) {

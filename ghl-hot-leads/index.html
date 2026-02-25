@@ -3,278 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 Hot Leads Dashboard | Brightstar Solar</title>
+    <title>GHL Hot Leads Dashboard | Brightstar Solar</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         :root {
-            --bg-primary: #0a0e1a;
-            --bg-secondary: #141b2d;
-            --bg-card: #1e2746;
+            --bg: #0a0e1a;
+            --card: #141b2d;
             --border: #2d3748;
-            --text-primary: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --accent-blue: #3b82f6;
-            --accent-green: #10b981;
-            --accent-orange: #f59e0b;
-            --accent-red: #ef4444;
-            --accent-purple: #8b5cf6;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --cps: #3b82f6;
+            --rqs: #10b981;
+            --fire: #f59e0b;
+            --danger: #ef4444;
         }
-
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
         }
-
+        
         .header {
             background: linear-gradient(135deg, #1e3a5f 0%, #0a0e1a 100%);
             padding: 2rem;
             border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
-
+        
         .header h1 {
             font-size: 2rem;
             margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
         }
-
+        
         .header p {
-            color: var(--text-secondary);
+            color: var(--text-muted);
         }
-
-        .last-updated {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
+        
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
         }
-
+        
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin-bottom: 2rem;
         }
-
+        
         .stat-card {
-            background: var(--bg-secondary);
+            background: var(--card);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.5rem;
             text-align: center;
         }
-
+        
         .stat-value {
             font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 0.25rem;
         }
-
+        
         .stat-label {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 0.9rem;
+            margin-top: 0.25rem;
         }
-
-        .cps-color { color: var(--accent-blue); }
-        .rqs-color { color: var(--accent-green); }
-        .fire-color { color: var(--accent-orange); }
-
-        .filters {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--accent-blue);
-            border-color: var(--accent-blue);
-        }
-
+        
+        .cps-color { color: var(--cps); }
+        .rqs-color { color: var(--rqs); }
+        .fire-color { color: var(--fire); }
+        
         .lead-card {
-            background: var(--bg-card);
+            background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-        }
-
-        .lead-header {
+            border-radius: 12px;
             padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
+            margin-bottom: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .lead-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+        
+        .lead-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
         }
-
-        .lead-header:hover {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, transparent 100%);
-        }
-
+        
         .lead-rank {
-            background: var(--accent-orange);
+            background: var(--fire);
             color: #000;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
-
-        .lead-info {
-            flex: 1;
-            margin-left: 1rem;
-        }
-
+        
         .lead-name {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 0.25rem;
         }
-
+        
         .lead-contact {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
-
-        .lead-scores {
+        
+        .scores {
             display: flex;
             gap: 2rem;
-            align-items: center;
+            margin: 1rem 0;
         }
-
+        
         .score-box {
             text-align: center;
         }
-
+        
         .score-value {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
         }
-
+        
         .score-label {
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: var(--text-secondary);
         }
-
-        .quadrant-badge {
+        
+        .quadrant {
+            display: inline-block;
             padding: 0.4rem 1rem;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
+            margin: 1rem 0;
         }
-
-        .quadrant-hot {
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+        
+        .quadrant-priority {
+            background: linear-gradient(135deg, #ef4444, #f59e0b);
         }
-
-        .quadrant-warm {
-            background: linear-gradient(135deg, var(--accent-orange), #eab308);
+        
+        .quadrant-fast {
+            background: linear-gradient(135deg, #f59e0b, #eab308);
         }
-
+        
         .quadrant-strategic {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
         }
-
-        .quadrant-cold {
+        
+        .quadrant-nurture {
             background: #475569;
         }
-
-        .lead-body {
-            padding: 1.5rem;
-            display: none;
+        
+        .factors {
+            margin: 1rem 0;
         }
-
-        .lead-body.expanded {
-            display: block;
-        }
-
-        .section-title {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.75rem;
-            margin-top: 1.5rem;
-        }
-
-        .section-title:first-child {
-            margin-top: 0;
-        }
-
-        .factors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-        }
-
-        .factor-box {
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            padding: 1rem;
-        }
-
-        .factor-box h4 {
+        
+        .factors h4 {
             font-size: 0.85rem;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             margin-bottom: 0.5rem;
+            text-transform: uppercase;
         }
-
+        
         .factor-tag {
             display: inline-block;
             background: rgba(255,255,255,0.05);
             padding: 0.3rem 0.8rem;
             border-radius: 4px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin: 0.2rem;
         }
-
-        .action-box {
+        
+        .action-section {
             background: rgba(59, 130, 246, 0.1);
-            border-left: 3px solid var(--accent-blue);
+            border-left: 3px solid var(--cps);
             padding: 1rem;
-            border-radius: 0 8px 8px 0;
             margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
         }
-
-        .action-box h4 {
-            color: var(--accent-blue);
+        
+        .action-section h4 {
+            color: var(--cps);
             margin-bottom: 0.5rem;
         }
-
+        
         .draft-message {
             background: rgba(255,255,255,0.05);
             padding: 1rem;
@@ -282,97 +209,38 @@
             font-style: italic;
             margin: 0.5rem 0;
         }
-
+        
         .talking-points {
             margin-top: 0.5rem;
         }
-
+        
         .talking-points li {
             margin: 0.25rem 0;
             margin-left: 1.5rem;
         }
-
-        .call-analysis {
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-
-        .call-analysis h4 {
-            color: var(--accent-green);
-            margin-bottom: 0.5rem;
-        }
-
-        .transcript-box {
-            background: rgba(0,0,0,0.3);
-            padding: 1rem;
-            border-radius: 8px;
-            max-height: 300px;
-            overflow-y: auto;
-            font-size: 0.9rem;
-            line-height: 1.8;
-            margin-top: 0.5rem;
-        }
-
-        .verified-badge {
-            background: var(--accent-green);
-            color: #000;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-left: 0.5rem;
-        }
-
-        .expand-icon {
-            font-size: 1.5rem;
-            transition: transform 0.2s;
-        }
-
-        .expand-icon.rotated {
-            transform: rotate(180deg);
-        }
-
+        
         .loading {
             text-align: center;
             padding: 4rem;
-            color: var(--text-secondary);
+            color: var(--text-muted);
         }
-
-        .error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid var(--accent-red);
-            padding: 1rem;
-            border-radius: 8px;
+        
+        .last-updated {
             text-align: center;
-        }
-
-        @media (max-width: 768px) {
-            .lead-scores {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-            
-            .lead-header {
-                flex-wrap: wrap;
-            }
-            
-            .filters {
-                justify-content: center;
-            }
+            color: var(--text-muted);
+            padding: 1rem;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>🔥 Hot Leads Dashboard</h1>
-        <p>Brightstar Solar • CarePlus 2 Factor Pipeline • AI-Powered Scoring</p>
-        <div class="last-updated">Last updated: <span id="lastUpdate">Loading...</span></div>
+        <p>Brightstar Solar • GHL Sales Assistant • Daily Top 10</p>
     </div>
-
+    
     <div class="container">
-        <div class="stats-grid" id="statsGrid">
+        <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-value cps-color" id="avgCps">--</div>
                 <div class="stat-label">Avg CPS</div>
@@ -383,96 +251,57 @@
             </div>
             <div class="stat-card">
                 <div class="stat-value fire-color" id="hotCount">--</div>
-                <div class="stat-label">Hot Leads</div>
+                <div class="stat-label">Priority Deals</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value" id="totalScored">--</div>
                 <div class="stat-label">Leads Scored</div>
             </div>
         </div>
-
-        <div class="filters">
-            <button class="filter-btn active" data-filter="all">All Leads</button>
-            <button class="filter-btn" data-filter="hot">🔥 Hot (CPS 4.5+)</button>
-            <button class="filter-btn" data-filter="warm">📈 Warm (CPS 3.5+)</button>
-            <button class="filter-btn" data-filter="strategic">🎯 Strategic</button>
-        </div>
-
+        
         <div id="leadsContainer">
             <div class="loading">Loading hot leads...</div>
         </div>
+        
+        <div class="last-updated">
+            Last updated: <span id="lastUpdate">--</span>
+        </div>
     </div>
-
+    
     <script>
-        let leadsData = [];
-        let currentFilter = 'all';
-
         async function loadData() {
             try {
                 const response = await fetch('latest_report.json?t=' + Date.now());
                 const data = await response.json();
                 
-                leadsData = data.top_10_leads || [];
-                
                 // Update stats
-                document.getElementById('lastUpdate').textContent = new Date(data.generated_at).toLocaleString();
-                
-                const avgCps = leadsData.reduce((a, b) => a + b.cps, 0) / leadsData.length;
-                const avgRqs = leadsData.reduce((a, b) => a + b.rqs, 0) / leadsData.length;
-                const hotCount = leadsData.filter(l => l.cps >= 4.5).length;
+                const leads = data.top_10_leads || [];
+                const avgCps = leads.reduce((a, b) => a + b.cps, 0) / leads.length;
+                const avgRqs = leads.reduce((a, b) => a + b.rqs, 0) / leads.length;
+                const hotCount = leads.filter(l => l.quadrant.includes('PRIORITY')).length;
                 
                 document.getElementById('avgCps').textContent = avgCps.toFixed(1);
                 document.getElementById('avgRqs').textContent = avgRqs.toFixed(1);
                 document.getElementById('hotCount').textContent = hotCount;
-                document.getElementById('totalScored').textContent = data.scored_opportunities || leadsData.length;
+                document.getElementById('totalScored').textContent = data.total_contacts_analyzed || '--';
+                // Convert to PST
+                document.getElementById('lastUpdate').textContent = new Date(data.generated_at).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
                 
-                renderLeads();
-            } catch (e) {
-                document.getElementById('leadsContainer').innerHTML = `
-                    <div class="error">
-                        Error loading data. Make sure latest_report.json exists.<br>
-                        ${e.message}
-                    </div>
-                `;
-            }
-        }
-
-        function getQuadrantClass(quadrant) {
-            if (quadrant.includes('IMMINENT') || quadrant.includes('HOT')) return 'quadrant-hot';
-            if (quadrant.includes('WARM')) return 'quadrant-warm';
-            if (quadrant.includes('STRATEGIC')) return 'quadrant-strategic';
-            return 'quadrant-cold';
-        }
-
-        function renderLeads() {
-            const container = document.getElementById('leadsContainer');
-            
-            let filteredLeads = leadsData;
-            if (currentFilter === 'hot') {
-                filteredLeads = leadsData.filter(l => l.cps >= 4.5);
-            } else if (currentFilter === 'warm') {
-                filteredLeads = leadsData.filter(l => l.cps >= 3.5 && l.cps < 4.5);
-            } else if (currentFilter === 'strategic') {
-                filteredLeads = leadsData.filter(l => l.quadrant.includes('STRATEGIC'));
-            }
-            
-            if (filteredLeads.length === 0) {
-                container.innerHTML = '<div class="loading">No leads match this filter</div>';
-                return;
-            }
-            
-            container.innerHTML = filteredLeads.map((lead, index) => `
-                <div class="lead-card" data-rank="${lead.rank}">
-                    <div class="lead-header" onclick="toggleLead(${lead.rank})">
-                        <div style="display: flex; align-items: center; flex: 1;">
-                            <div class="lead-rank">${lead.rank}</div>
-                            <div class="lead-info">
-                                <div class="lead-name">${lead.name}</div>
-                                <div class="lead-contact">${lead.phone} • ${lead.email || 'No email'}</div>
+                // Render leads
+                const container = document.getElementById('leadsContainer');
+                container.innerHTML = leads.map(lead => `
+                    <div class="lead-card">
+                        <div class="lead-header">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div class="lead-rank">${lead.rank}</div>
+                                <div>
+                                    <div class="lead-name">${lead.name}</div>
+                                    <div class="lead-contact">${lead.phone} • ${lead.email}</div>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="lead-scores">
+                        <div class="scores">
                             <div class="score-box">
                                 <div class="score-value cps-color">${lead.cps}</div>
                                 <div class="score-label">CPS</div>
@@ -485,99 +314,51 @@
                                 <div class="score-value" style="color: #f59e0b;">${lead.combined_score}</div>
                                 <div class="score-label">Combined</div>
                             </div>
-                            <div class="quadrant-badge ${getQuadrantClass(lead.quadrant)}">
-                                ${lead.quadrant.replace('🔥', '').replace('📈', '').replace('🎯', '').replace('💤', '').trim()}
-                            </div>
-                            <div class="expand-icon" id="icon-${lead.rank}">▼</div>
-                        </div>
-                    </div>
-                    
-                    <div class="lead-body" id="body-${lead.rank}">
-                        <div class="section-title">Stage</div>
-                        <div style="font-size: 1.1rem; margin-bottom: 1rem;">${lead.stage}</div>
-                        
-                        <div class="factors-grid">
-                            <div class="factor-box">
-                                <h4>📊 CPS Breakdown (Close Probability)</h4>
-                                ${lead.cps_breakdown.map(f => `<span class="factor-tag">${f}</span>`).join('')}
-                            </div>
-                            <div class="factor-box">
-                                <h4>💰 RQS Breakdown (Revenue Quality)</h4>
-                                ${lead.rqs_breakdown.map(f => `<span class="factor-tag">${f}</span>`).join('')}
-                            </div>
                         </div>
                         
-                        ${lead.call_verified_data && Object.keys(lead.call_verified_data).some(k => lead.call_verified_data[k]) ? `
-                        <div class="call-analysis">
-                            <h4>🎙️ Call-Verified Data</h4>
-                            ${lead.call_verified_data.bill_from_call ? `<div>💰 Bill: $${lead.call_verified_data.bill_from_call} <span class="verified-badge">CALL</span></div>` : ''}
-                            ${lead.call_verified_data.credit_from_call ? `<div>💎 Credit: ${lead.call_verified_data.credit_from_call} <span class="verified-badge">CALL</span></div>` : ''}
-                            ${lead.call_verified_data.has_ev ? `<div>🔋 Has EV <span class="verified-badge">CALL</span></div>` : ''}
-                            ${lead.call_verified_data.roof_from_call ? `<div>🏠 Roof: ${lead.call_verified_data.roof_from_call} <span class="verified-badge">CALL</span></div>` : ''}
+                        <div class="quadrant ${getQuadrantClass(lead.quadrant)}">
+                            ${lead.quadrant}
                         </div>
-                        ` : ''}
                         
-                        <div class="action-box">
+                        <div class="factors">
+                            <h4>Close Probability Factors</h4>
+                            ${lead.cps_breakdown.map(f => `<span class="factor-tag">${f}</span>`).join('')}
+                        </div>
+                        
+                        <div class="factors">
+                            <h4>Revenue Quality Factors</h4>
+                            ${lead.rqs_breakdown.map(f => `<span class="factor-tag">${f}</span>`).join('')}
+                        </div>
+                        
+                        <div class="action-section">
                             <h4>🎯 ${lead.next_action}</h4>
-                            ${lead.draft_message ? `<div class="draft-message">"${lead.draft_message}"</div>` : ''}
-                            ${lead.talking_points && lead.talking_points.length ? `
+                            <div class="draft-message">"${lead.draft_message}"</div>
                             <ul class="talking-points">
                                 ${lead.talking_points.map(p => `<li>${p}</li>`).join('')}
                             </ul>
-                            ` : ''}
                         </div>
-                        
-                        ${lead.call_analyses && lead.call_analyses.length ? `
-                        <div class="call-analysis">
-                            <h4>📞 Recent Call Analysis</h4>
-                            ${lead.call_analyses.map(call => `
-                                <div style="margin-top: 0.5rem; padding: 0.5rem; background: rgba(0,0,0,0.2); border-radius: 4px;">
-                                    <strong>${call.direction}</strong> • ${call.duration}s • Sentiment: ${call.sentiment}
-                                    ${call.pricing_discussed ? '💰' : ''} ${call.financing_mentioned ? '💳' : ''}
-                                    <div style="margin-top: 0.25rem; font-size: 0.9rem; color: var(--text-secondary);">
-                                        ${call.summary}
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                        ` : ''}
                     </div>
-                </div>
-            `).join('');
-        }
-
-        function toggleLead(rank) {
-            const body = document.getElementById(`body-${rank}`);
-            const icon = document.getElementById(`icon-${rank}`);
-            
-            if (body.classList.contains('expanded')) {
-                body.classList.remove('expanded');
-                icon.classList.remove('rotated');
-            } else {
-                // Close all others
-                document.querySelectorAll('.lead-body').forEach(b => b.classList.remove('expanded'));
-                document.querySelectorAll('.expand-icon').forEach(i => i.classList.remove('rotated'));
+                `).join('');
                 
-                body.classList.add('expanded');
-                icon.classList.add('rotated');
+            } catch (e) {
+                document.getElementById('leadsContainer').innerHTML = `
+                    <div class="loading">
+                        Error loading data. Make sure latest_report.json exists.<br>
+                        ${e.message}
+                    </div>
+                `;
             }
         }
-
-        // Filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentFilter = btn.dataset.filter;
-                renderLeads();
-            });
-        });
-
-        // Load data
-        loadData();
         
-        // Refresh every 5 minutes
-        setInterval(loadData, 300000);
+        function getQuadrantClass(quadrant) {
+            if (quadrant.includes('PRIORITY')) return 'quadrant-priority';
+            if (quadrant.includes('FAST')) return 'quadrant-fast';
+            if (quadrant.includes('STRATEGIC')) return 'quadrant-strategic';
+            return 'quadrant-nurture';
+        }
+        
+        loadData();
+        setInterval(loadData, 60000); // Refresh every minute
     </script>
 </body>
 </html>

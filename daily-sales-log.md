@@ -6,37 +6,50 @@
 
 ## Wednesday, February 25, 2026
 
-### Today's Appointments (12 total - via GHL Calendar API)
-| Time | Customer | Status |
-|------|----------|--------|
-| 9:00 AM | **Cathy Johnson** | Virtual CarePlus Appt |
-| 9:15 AM | **Richard Allen** | Virtual CarePlus Appt |
-| 10:00 AM | **Chris Rivera** | Virtual CarePlus Appt |
-| 10:00 AM | **Alfredo Gonzalez** | Virtual CarePlus Appt |
-| 10:45 AM | **Vi Ly** | Virtual CarePlus Appt |
-| 1:30 PM | **Ana Hernandes** | Virtual CarePlus Appt |
-| 2:00 PM | **Glenn Taplin** | Virtual CarePlus Appt |
-| 3:00 PM | **Tami Ngo Au** | Virtual CarePlus Appt |
-| 4:00 PM | **Mary Velez** | Virtual CarePlus Appt |
-| 5:30 PM | **Krystle Rodriguez** | Virtual CarePlus Appt |
-| 6:00 PM | **Anthony Koelsch** | Complete Solar Application |
-| 7:00 PM | **Nancy & Henry Wong** | Virtual CarePlus Appt |
+### Today's Appointments (14 total - via GHL Calendar API)
+| Time | Customer | Status | Outcome |
+|------|----------|--------|---------|
+| 9:00 AM | **Cathy Johnson** | Virtual CarePlus Appt | ✅ **SHOWED** |
+| 10:00 AM | **Chris Rivera** | Virtual CarePlus Appt | ❌ **NO-SHOW** |
+| 10:45 AM | **Vi Ly** | Virtual CarePlus Appt | ✅ **SHOWED** |
+| 12:00 PM | **Donnie Cantaloupi** | Virtual CarePlus Appt | ❌ **NO-SHOW** |
+| 12:00 PM | **Sandra Sgorbati (AO)** | Virtual CarePlus Appt | ⏳ Confirmed (no outcome) |
+| 12:00 PM | **Thinn Ong** | Virtual CarePlus Appt | 🚫 **CANCELLED** |
+| 1:00 PM | **Nancy/Jimmy Castanuela** | Virtual CarePlus Appt | ❌ **NO-SHOW** |
+| 1:30 PM | **Ana Hernandes** | Virtual CarePlus Appt | ✅ **SHOWED** |
+| 2:30 PM | **Gabriel Sandoval** | Application | ⏳ Confirmed (no outcome) |
+| 4:00 PM | **Mary Velez** | Virtual CarePlus Appt | ❌ **NO-SHOW** |
+| 5:00 PM | **Tami Ngo Au** | Virtual CarePlus Appt | ✅ **SHOWED** |
+| 5:00 PM | **John Payne** | Virtual CarePlus Appt | ⚪ **INVALID** |
+| 6:00 PM | **Earl Lowery** | Virtual CarePlus Appt | ⚪ **INVALID** |
+| 6:00 PM | **Anthony Koelsch** | Complete Solar Application | 🚫 **CANCELLED** |
+
+### Day Summary
+| Metric | Count |
+|--------|-------|
+| Total Appointments | 14 |
+| ✅ Showed | 4 |
+| ❌ No-Show | 4 |
+| 🚫 Cancelled | 2 |
+| ⚪ Invalid | 2 |
+| ⏳ No Outcome Logged | 2 |
+| **Show Rate** | **4/10 = 40%** (excl. cancelled/invalid) |
 
 ### Lead Activity Log
-- **Cathy Johnson** - 9:00 AM appt, CARE program, avg bill $1000-1300
-- **Chris Rivera** - 10:00 AM appt, **no show**, re-engage needed
-- **Vi Ly** - 10:45 AM appt, **showed**, proposal delivered $142/mo, roof concern, reset for March 4
-- **Mary Velez** - 4:00 PM appt, no programs, no EV
-- **Glenn Taplin** - avg bill $150-300
-- **Richard Allen** - $200 avg, electric only
-- **Nancy Castanuela** - pipeline tracking active
-- **Herson Sariles** - 📊 AI lead score: 4/5 ⭐⭐⭐⭐
-- **Donnie Cantaloupi** - 📊 AI lead score: 4/5 ⭐⭐⭐⭐
-- **Alfredo Gonzalez** - avg bill $180-300
-- **Ana Hernandes** - 1:30 PM appt (rescheduled)
-- **Tami Ngo Au** - 3:00 PM appt
-- **Krystle Rodriguez** - 5:30 PM appt
-- **Anthony Koelsch** - 6:00 PM appt
+- **Cathy Johnson** - ✅ **SHOWED** 9:00 AM, CARE program, avg bill $1000-1300, credit 650+
+- **Chris Rivera** - ❌ **NO-SHOW** 10:00 AM, re-engage needed
+- **Vi Ly** - ✅ **SHOWED** 10:45 AM, proposal delivered $142/mo, roof concern, reset for March 4
+- **Donnie Cantaloupi** - ❌ **NO-SHOW** 12:00 PM, $400-700 bill, CARE program, flat roof
+- **Thinn Ong** - 🚫 **CANCELLED** 12:00 PM, CARE, $150-300 bill, 20yr roof
+- **Nancy Castanuela** - ❌ **NO-SHOW** 1:00 PM, $300-450 bill, roof 3-4yrs
+- **Ana Hernandes** - ✅ **SHOWED** 1:30 PM, avg bill $200-300, may want roof replacement
+- **Mary Velez** - ❌ **NO-SHOW** 4:00 PM, $400-500 bill, credit ~750, roof 5yrs
+- **Tami Ngo Au** - ✅ **SHOWED** 5:00 PM, $300+ avg, last bill $700, 1 EV, credit 650+
+- **John Payne** - ⚪ **INVALID** status, EV owner, wants charging station + heat pump
+- **Earl Lowery** - ⚪ **INVALID** status, existing solar (2010), $2200 true-up bill, CARE + Medical
+- **Anthony Koelsch** - 🚫 **CANCELLED** 6:00 PM
+- **Sandra Sgorbati** - Existing solar owner (25 panels + battery), CARE + Medical
+- **Gabriel Sandoval** - Application appointment (no outcome logged)
 
 ### Pipeline Summary
 | Lead | Stage | Status/Notes |

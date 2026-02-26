@@ -371,7 +371,7 @@
                 <div class="stat-label">In Progress</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" style="color: var(--accent-red);">9</div>
+                <div class="stat-value" style="color: var(--accent-red);">10</div>
                 <div class="stat-label">Not Started</div>
             </div>
         </div>
@@ -524,29 +524,31 @@
                 </div>
             </div>
             
-            <!-- Section 8 -->
-            <div class="section-card">
+            <!-- Section 8 - NEW -->
+            <div class="section-card" style="border: 2px solid var(--accent-purple);">
                 <div class="section-header">
                     <div>
-                        <div class="section-number">SECTION 8</div>
-                        <div class="section-title">📎 Bill Image Analyzer & Alerts</div>
+                        <div class="section-number" style="color: var(--accent-purple);">SECTION 8 ⭐ NEW</div>
+                        <div class="section-title">📸 Bill Image Analyzer & Alert System</div>
                     </div>
                     <span class="status-badge status-not-started">Not Started</span>
                 </div>
                 <ul class="section-features">
-                    <li>🔔 Auto-detect bill images texted in</li>
-                    <li>Extract usage, costs, programs</li>
-                    <li>Calculate annual kWh & savings</li>
+                    <li>🔔 Auto-scan GHL messages for bill images</li>
+                    <li>Detect PGE format via OpenAI Vision</li>
+                    <li>Extract: charges, kWh, rate, CARE/FERA</li>
+                    <li>Alert: "Bill received from [Name] 2h ago"</li>
+                    <li>Auto-update contact fields + re-calc scores</li>
                     <li>Include analysis in pre-appt summary</li>
                 </ul>
                 <div class="section-meta">
                     <span class="meta-item">Priority: <span class="meta-value priority-high">High</span></span>
-                    <span class="meta-item">File: <a href="#" class="file-link">bill_analyzer.py</a></span>
+                    <span class="meta-item">File: <a href="#" class="file-link">bill_image_analyzer.py</a></span>
                 </div>
             </div>
             
-            <!-- Section 9 -->
-            <div class="section-card">
+            <!-- Section 9 - NEW -->
+            <div class="section-card" style="border: 2px solid var(--accent-purple);">
                 <div class="section-header">
                     <div>
                         <div class="section-number">SECTION 9</div>
@@ -565,6 +567,27 @@
                     <span class="meta-item">File: <a href="#" class="file-link">appointment_lookahead.py</a></span>
                 </div>
             </div>
+            
+            <!-- Section 10 - NEW -->
+            <div class="section-card" style="border: 2px solid var(--accent-purple);">
+                <div class="section-header">
+                    <div>
+                        <div class="section-number">SECTION 10</div>
+                        <div class="section-title">🎯 AI Sales Coach - Call Review & Feedback</div>
+                    </div>
+                    <span class="status-badge status-not-started">Not Started</span>
+                </div>
+                <ul class="section-features">
+                    <li>🎤 Auto-transcribe appointment calls</li>
+                    <li>✅ What went well analysis</li>
+                    <li>⚠️ Improvement suggestions</li>
+                    <li>📊 Sales coaching score</li>
+                </ul>
+                <div class="section-meta">
+                    <span class="meta-item">Priority: <span class="meta-value priority-high">High</span></span>
+                    <span class="meta-item">File: <a href="#" class="file-link">sales_coach.py</a></span>
+                </div>
+            </div>
         </div>
         
         <div class="bottom-grid">
@@ -581,6 +604,10 @@
             <div class="sidebar-section">
                 <h3 class="sidebar-title">📝 Recent Changes</h3>
                 <ul class="commit-list">
+                    <li class="commit-item">
+                        <div class="commit-msg">✨ Added Sections 9-10: Lookahead Monitor + Sales Coach</div>
+                        <div class="commit-meta">Feb 26, 2026 • Feature</div>
+                    </li>
                     <li class="commit-item">
                         <div class="commit-msg">✨ Added Section 8: Bill Image Analyzer</div>
                         <div class="commit-meta">Feb 26, 2026 • Feature</div>

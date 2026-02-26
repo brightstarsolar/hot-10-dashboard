@@ -1,0 +1,104 @@
+{
+  "leads": {
+    "Cathy Johnson": {
+      "opportunity_id": "80LkmTwKnHkVolv0ADHu",
+      "contact_id": "uQHHCeJBGdqnlz3Csuug",
+      "stage_id": "06ddd45b-c2eb-48c4-846d-834a7b74dea2",
+      "stage_name": "Appt Set (for Closer)",
+      "note_count": 6,
+      "latest_note": "Originator Notes From Calendar:\ncare program avg bill 1000-1300 recieves care program credit 650+has no ev roof in good condition sending bill tonight \n",
+      "recent_calls": [],
+      "monetary_value": 0,
+      "last_updated": "2026-02-25T23:08:59.446083+00:00"
+    },
+    "Mary Velez": {
+      "opportunity_id": "Ppbz7ZnKNuFgn5zrelOA",
+      "contact_id": "KJRWwqcxAXgGg6C7x0G3",
+      "stage_id": "06ddd45b-c2eb-48c4-846d-834a7b74dea2",
+      "stage_name": "Appt Set (for Closer)",
+      "note_count": 3,
+      "latest_note": "Originator Notes From Calendar:\nno programs no ev average bill last few months 4-500 roof replaced 5 years ago credit is about 750 ",
+      "recent_calls": [],
+      "monetary_value": 0,
+      "last_updated": "2026-02-25T23:09:00.078616+00:00"
+    },
+    "Glenn Taplin": {
+      "opportunity_id": "7XJgONoYK8GUMblggSaX",
+      "contact_id": "X4QPuebG0WXoARTUcWPX",
+      "stage_id": "06ddd45b-c2eb-48c4-846d-834a7b74dea2",
+      "stage_name": "Appt Set (for Closer)",
+      "note_count": 4,
+      "latest_note": "Originator Notes From Calendar:\navg bill 150-300 no programs no ev roof had work done a year ago in good condition credit below 650 ",
+      "recent_calls": [],
+      "monetary_value": 0,
+      "last_updated": "2026-02-25T23:09:00.707277+00:00"
+    },
+    "Richard Allen": {
+      "opportunity_id": "XvtB0vbDUIlzt9PON7Dg",
+      "contact_id": "nIyI5CtiCRsn1f3l3jdc",
+      "stage_id": "06ddd45b-c2eb-48c4-846d-834a7b74dea2",
+      "stage_name": "Appt Set (for Closer)",
+      "note_count": 6,
+      "latest_note": "Originator Notes From Calendar:\n200 avg just electricity does recieve care and medical roof may need to be replaced its 50 year old shake he is open to replacing no ev credit 800+",
+      "recent_calls": [],
+      "monetary_value": 0,
+      "last_updated": "2026-02-25T23:09:01.496631+00:00"
+    },
+    "Nancy Castanuela": {
+      "opportunity_id": "KYI9jn139YCcIKkjRCVZ",
+      "contact_id": "62SaCiFme04ctBn1cTTP",
+      "stage_id": "06ddd45b-c2eb-48c4-846d-834a7b74dea2",
+      "stage_name": "Appt Set (for Closer)",
+      "note_count": 6,
+      "latest_note": "[ WAVV: 019c918b-54b9-722f-8b3f-eec2f4b6dcc4 ]\nTo: (808) 738-6020 (3)\nFrom: (510) 916-4283\nDuration: 198 seconds\nDisposition: No Answer\nTag: wavv-no-answer (1)",
+      "recent_calls": [],
+      "monetary_value": 0,
+      "last_updated": "2026-02-25T23:09:02.231010+00:00"
+    },
+    "Herson Sariles": {
+      "opportunity_id": "9wBfVQlMiQfSrOB2cS2U",
+      "contact_id": "mRwHKuPCVV5xh07RYSpQ",
+      "stage_id": "06ddd45b-c2eb-48c4-846d-834a7b74dea2",
+      "stage_name": "Appt Set (for Closer)",
+      "note_count": 6,
+      "latest_note": "\ud83d\udcca AI LEAD SCORE: 4/5 \u2b50\u2b50\u2b50\u2b50\n\nCATEGORY BREAKDOWN:\n  \u2022 credit_score: \u2b50\u2b50\u2b50\u2b50/5 \u2014 Notes explicitly state a credit score of 650, which falls into the 650\u2013699 range (approvable but may need verification).\n  \u2022 roof_condition: \u2b50\u2b50\u2b50/5 \u2014 Notes describe the roof as \"decent condition\" likely requiring inspection. Street/Satellite views show a unified composition shingle roof with no major damage, but age appears >10 years due to fading.\n  \u2022 roof_shading: \u2b50\u2b50\u2b50\u2b50\u2b50/5 \u2014 Satellite imagery shows a south-facing roof surface completely clear of obstructions. The tree in the front yard is positioned to the north and does not shade the roof.\n  \u2022 electric_bill: \u2b50/5 \u2014 Bill is stated as $150-$300 and on \"CARE\" rates. This predominantly falls into the low bill bracket ($120\u2013$279), offering limited savings potential.\n  \u2022 responsiveness: \u2b50\u2b50\u2b50\u2b50\u2b50/5 \u2014 Despite an initial SMS reply of \"Pass\", the lead answered the phone immediately, provided sensitive information (credit/bill), and scheduled a same-day appointment.",
+      "recent_calls": [],
+      "monetary_value": 0,
+      "last_updated": "2026-02-25T23:09:02.911994+00:00"
+    },
+    "Donnie Cantaloupi": {
+      "opportunity_id": "GCS1UsPh9DBNDSrYI0EX",
+      "contact_id": "yIkzM53CUchQEcwOgX9g",
+      "stage_id": "06ddd45b-c2eb-48c4-846d-834a7b74dea2",
+      "stage_name": "Appt Set (for Closer)",
+      "note_count": 6,
+      "latest_note": "\ud83d\udcca AI LEAD SCORE: 4/5 \u2b50\u2b50\u2b50\u2b50\n\nCATEGORY BREAKDOWN:\n  \u2022 credit_score: \u2b50\u2b50\u2b50\u2b50/5 \u2014 Notes explicitly state \"credit 650\", which falls within the 650\u2013699 range indicating a likely approval, potentially with conditions.\n  \u2022 roof_condition: \u2b50\u2b50\u2b50\u2b50\u2b50/5 \u2014 Notes indicate the \"roof is new flat top\". The satellite imagery confirms a clean, white, reflective roof surface (likely TPO or rolled roofing) that appears structurally sound and free of wear, consistent with a new roof.\n  \u2022 roof_shading: \u2b50\u2b50/5 \u2014 Satellite imagery reveals large trees surrounding the property with visible shadows cast directly onto the roof surface, particularly on the eastern and northern sections. The street view is completely obscured by dense vegetation, indicating a heavy canopy that will likely require mitigation or significantly impact production.\n  \u2022 electric_bill: \u2b50\u2b50\u2b50\u2b50/5 \u2014 Custom field data lists \"$300+\", which places the lead in the High ($280\u2013$349) category. The customer is also on the CARE program, suggesting high usage relative to the cost.\n  \u2022 responsiveness: \u2b50\u2b50\u2b50\u2b50\u2b50/5 \u2014 The lead responded immediately to SMS outreach (\"All right\") and an appointment was successfully set for the immediate future (Tuesday at 12:00 PM) within the same day of contact.",
+      "recent_calls": [],
+      "monetary_value": 0,
+      "last_updated": "2026-02-25T23:09:03.594476+00:00"
+    },
+    "Alfredo Gonzalez": {
+      "opportunity_id": "j4akH0AI4SByAiQLiGuV",
+      "contact_id": "Ocbr7kunqHMpil5jbWES",
+      "stage_id": "06ddd45b-c2eb-48c4-846d-834a7b74dea2",
+      "stage_name": "Appt Set (for Closer)",
+      "note_count": 9,
+      "latest_note": "Originator Notes From Calendar:\n180-300 avg with gas no programs no ev roof has a small leak and some missing shingles its 20 years old credit almost 600",
+      "recent_calls": [],
+      "monetary_value": 0,
+      "last_updated": "2026-02-25T23:09:04.245382+00:00"
+    },
+    "Ana Hernandes": {
+      "opportunity_id": "yDzzzf0ndO2gtczpbPJy",
+      "contact_id": "6nOTjPgTBIsDl5cRcVa6",
+      "stage_id": "f31f2675-a541-464a-ade5-77ad18f0f263",
+      "stage_name": "Follow-Up-Appt",
+      "note_count": 11,
+      "latest_note": "<p style=\"margin:0px\">does not want any out of pocket cost</p><p style=\"margin:0px\">wants to replace roof first</p><p style=\"margin:0px\">not open to a roof quote</p><p style=\"margin:0px\">says her husband knows some friends that will do the work. planning to replace the roof in the spring. was not open to a roof quote. was not open to solar until after the roof is replaced. </p>",
+      "recent_calls": [],
+      "monetary_value": 0,
+      "last_updated": "2026-02-25T23:09:04.910562+00:00"
+    }
+  },
+  "last_check": "2026-02-25T23:09:04.910590+00:00"
+}

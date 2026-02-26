@@ -27,29 +27,29 @@
 | **Show Rate** | **4/6 = 67%** (excl. cancelled) |
 
 ### Lead Activity Log
-- **Cathy Johnson** - ✅ **SHOWED** 9:00 AM, ⚠️ **CREDIT FAILED** - need co-signer or PACE alternative
+- **Cathy Johnson** - ✅ **SHOWED** 9:00 AM, ⚠️ **CREDIT FAILED** - credit consult with Dennis (650+)
 - **Chris Rivera** - ❌ **NO-SHOW** 10:00 AM, re-engage needed
 - **Vi Ly** - ✅ **SHOWED** 10:45 AM, proposal delivered $142/mo, roof concern, reset for March 4
 - **Ana Hernandes** - ✅ **SHOWED** 1:30 PM, avg bill $200-300, may want roof replacement, credit 700+
 - **Mary Velez** - ❌ **NO-SHOW** 4:00 PM, $400-500 bill, credit ~750, roof 5yrs
-- **Tami Ngo Au** - ✅ **SHOWED** 5:00 PM, ⚠️ **CREDIT FAILED** - high usage, last bill $700, PACE candidate
+- **Tami Ngo Au** - ✅ **SHOWED** 5:00 PM, ⚠️ **CREDIT FAILED** - high usage, last bill $700, credit consult with Dennis
 - **Anthony Koelsch** - 🚫 **CANCELLED** 6:00 PM
 
 ### Credit Failures & Follow-Up Required
-| Customer | Issue | Next Action |
-|----------|-------|-------------|
-| **Cathy Johnson** | Credit failed | PACE financing (CARE enrolled) or co-signer |
-| **Tami Ngo Au** | Credit failed | PACE financing (high bill = good PACE candidate) |
+| Customer | Issue | Credit Score | Next Action |
+|----------|-------|--------------|-------------|
+| **Cathy Johnson** | Credit failed | ~650 | Credit consult with Dennis (600+) |
+| **Tami Ngo Au** | Credit failed | ~650 | Credit consult with Dennis (600+) |
 
 ### Pipeline Summary (Feb 25 Outcomes)
 | Lead | Stage | Status/Notes |
 |------|-------|--------------|
-| **Cathy Johnson** | Credit-Failed | ⚠️ **CREDIT FAILED** - PACE or co-signer needed, CARE enrolled, $1000-1300 bill |
+| **Cathy Johnson** | Credit-Failed | ⚠️ **CREDIT FAILED** - credit consult with Dennis, CARE enrolled, $1000-1300 bill |
 | **Chris Rivera** | Appt Set | ❌ **NO SHOW** - re-engage needed |
 | **Vi Ly** | Follow-Up-Appt | ✅ **SHOWED** - reset for March 4, proposal delivered |
 | **Ana Hernandes** | Proposal | ✅ **SHOWED** - credit 700+, may want roof replacement |
 | **Mary Velez** | Appt Set | ❌ **NO SHOW** - $400-500 bill, credit ~750 |
-| **Tami Ngo Au** | Credit-Failed | ⚠️ **CREDIT FAILED** - PACE candidate, $700 last bill, 1 EV |
+| **Tami Ngo Au** | Credit-Failed | ⚠️ **CREDIT FAILED** - credit consult with Dennis, $700 last bill, 1 EV |
 | **Glenn Taplin** | Appt Set | bill $150-300, credit <650 |
 | **Richard Allen** | Appt Set | bill $200, credit 800+, roof 50yr needs work |
 | **Nancy Castanuela** | Appt Set | bill $300-450, roof 3-4yrs new |
